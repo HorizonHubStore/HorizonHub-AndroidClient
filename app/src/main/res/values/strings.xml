@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HorizonHub-AndroidClient</string>
+    <string name="btnSaveStudent">Save Student</string>
 </resources>
