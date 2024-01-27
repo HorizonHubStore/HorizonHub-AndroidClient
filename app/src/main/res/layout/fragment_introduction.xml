@@ -33,7 +33,7 @@
         style="@style/h4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/tvRightAddressForShopping"
+        android:layout_marginTop="@dimen/tvRightAddressMargin"
         android:gravity="center"
         android:text="@string/IntroductionTitle"
         android:textAlignment="center"
@@ -54,7 +54,6 @@
         android:text="@string/quality"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/tvRightAddressForShopping"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tvRightAddressForShopping"
         app:layout_constraintTop_toBottomOf="@+id/tvRightAddressForShopping" />
 
@@ -69,7 +68,7 @@
     <androidx.appcompat.widget.AppCompatButton
         style="@style/blueButtonStyle"
         android:layout_width="@dimen/smallButtonWidth"
-        android:layout_height="@dimen/smallButtonHight"
+        android:layout_height="@dimen/smallButtonHeight"
         android:text="@string/introductionStartButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/tvQuality"
