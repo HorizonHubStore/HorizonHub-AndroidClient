@@ -1,6 +1,7 @@
 package com.example.horizonhub_androidclient.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.example.horizonhub_androidclient.data.User
 import com.example.horizonhub_androidclient.utilities.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -16,8 +17,8 @@ class RegisterViewModel @Inject constructor(
 
     private val _register = MutableStateFlow<Resource<FirebaseUser>>(Resource.Loading())
     val register: Flow<Resource<FirebaseUser>> = _register
-    fun createUserWithEmailAndPassword(email: String, password: String) =
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+    fun createUserWithEmailAndPassword(user: User, password: String) =
+        firebaseAuth.createUserWithEmailAndPassword(user.email, password)
             .addOnSuccessListener {
                 it.user?.let { user ->
                     _register.value = Resource.Success(user)

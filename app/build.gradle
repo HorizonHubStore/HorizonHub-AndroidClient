@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -33,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -52,7 +57,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     //circular image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    //viewpager2 indicatior
+    //viewpager2 indicator
     implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1'
     //stepView
     implementation 'com.shuhart.stepview:stepview:1.5.1'
@@ -61,4 +66,8 @@ dependencies {
     //Dagger hilt
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-auth:22.3.1'
+
 }
