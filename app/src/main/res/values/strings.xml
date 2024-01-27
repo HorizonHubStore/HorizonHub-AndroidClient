@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">HorizonHub-AndroidClient</string>
     <string name="btnSaveStudent">Save Student</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="IntroductionTitle">HorizonHub\nThe VideoGame Store\nfor AI generated Games</string>
+    <string name="quality">It is now easy to enjoy the best Videogames\ncreated by AI Game Developers Online</string>
+    <string name="introductionStartButton">start</string>
+    <string name="storeName">Horizon Hub</string>
 </resources>
