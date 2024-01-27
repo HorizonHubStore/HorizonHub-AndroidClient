@@ -28,6 +28,14 @@
         app:layout_constraintStart_toStartOf="@id/guidelineEllipseLeft"
         app:layout_constraintTop_toTopOf="@id/guidelineEllipseTop" />
 
+    <ImageView
+        android:id="@+id/rightTexture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/texture_right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineLeftTexture" />
+
     <TextView
         android:id="@+id/tvRightAddressForShopping"
         style="@style/h4"
@@ -56,14 +64,6 @@
         app:layout_constraintEnd_toEndOf="@+id/tvRightAddressForShopping"
         app:layout_constraintStart_toStartOf="@+id/tvRightAddressForShopping"
         app:layout_constraintTop_toBottomOf="@+id/tvRightAddressForShopping" />
-
-    <ImageView
-        android:id="@+id/rightTexture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/texture_right"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineLeftTexture" />
 
     <androidx.appcompat.widget.AppCompatButton
         style="@style/blueButtonStyle"

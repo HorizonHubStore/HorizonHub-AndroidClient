@@ -7,6 +7,14 @@
     <string name="quality">enjoy the best Video Games\ncreated with AI tools</string>
     <string name="introductionStartButton">start</string>
     <string name="storeName">Horizon Hub</string>
+    <string name="accountOptionsPageRegisterButtonText">Register</string>
+    <string name="accountOptionsPageLoginButtonText">Login</string>
+    <string name="loginPageSignIn">Sign in:</string>
+    <string name="loginPageRegisterHere">Don\'t have an account yet? Register here\!</string>
+    <string name="emailEditHint">Email</string>
+    <string name="passwordEditHint">Password</string>
+    <string name="forgotPasswordLogin">Forgot Password?</string>
+    <string name="registerPageCreateAccount">Create an account:</string>
+    <string name="fullNameEditHint">Full Name</string>
     <string name="registerPageRegisterButtonText">Register</string>
-    <string name="registerPageLoginButtonText">Login</string>
 </resources>

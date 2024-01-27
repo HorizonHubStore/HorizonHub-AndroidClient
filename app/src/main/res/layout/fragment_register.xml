@@ -7,12 +7,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/blury_background"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/blurry_background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <TextView
             android:id="@+id/tvAppName"
@@ -22,9 +23,9 @@
             android:drawablePadding="6dp"
             android:text="@string/storeName"
             android:textStyle="bold"
-            app:drawableStartCompat="@drawable/ic_horizonhub_shape"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:drawableStartCompat="@drawable/ic_horizon_hub_shape"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
             app:layout_constraintTop_toTopOf="@id/textGuideline" />
 
         <TextView
@@ -33,58 +34,110 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:text="@string/IntroductionTitle"
-            android:textAlignment="center"
+            android:text="@string/registerPageCreateAccount"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
             app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+
+        <EditText
+            android:id="@+id/etFullNameRegister"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/editTextHeight"
+            android:layout_marginTop="50dp"
+            android:hint="@string/fullNameEditHint"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping" />
+
+        <EditText
+            android:id="@+id/etEmailLogin"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/editTextHeight"
+            android:hint="@string/emailEditHint"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@id/etFullNameRegister" />
+
+        <EditText
+            android:id="@+id/etPasswordLogin"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/editTextHeight"
+            android:layout_marginTop="15dp"
+            android:hint="@string/passwordEditHint"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@id/etEmailLogin" />
 
 
         <TextView
-            android:id="@+id/tvQuality"
+            android:id="@+id/tvForgotPassword"
             style="@style/h2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="@string/quality"
+            android:text="@string/forgotPasswordLogin"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@+id/tvRightAddressForShopping"
-            app:layout_constraintStart_toStartOf="@+id/tvRightAddressForShopping"
-            app:layout_constraintTop_toBottomOf="@+id/tvRightAddressForShopping" />
+            app:layout_constraintStart_toStartOf="@+id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonRegisterAccountOptions"
             style="@style/blueButtonStyle"
-            android:layout_width="@dimen/smallButtonWidth"
             android:layout_height="@dimen/smallButtonHeight"
+            android:layout_margin="@dimen/buttonLoginAccountOptionsMargin"
             android:text="@string/registerPageRegisterButtonText"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/tvQuality"
-            app:layout_constraintStart_toStartOf="@id/tvQuality"
-            app:layout_constraintTop_toBottomOf="@id/tvQuality"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintBottom_toTopOf="@id/tvDoNotHaveAccountYet"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonLoginAccountOptions"
-            style="@style/whiteButtonStyle"
-            android:layout_width="@dimen/smallButtonWidth"
-            android:layout_height="@dimen/smallButtonHeight"
-            android:text="@string/registerPageLoginButtonText"
-            app:layout_constraintEnd_toEndOf="@id/tvQuality"
-            app:layout_constraintStart_toStartOf="@id/tvQuality"
-            app:layout_constraintTop_toBottomOf="@id/buttonRegisterAccountOptions"
-            android:layout_margin="10dp"/>
+        <TextView
+            android:id="@+id/tvDoNotHaveAccountYet"
+            style="@style/h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/loginPageRegisterHere"
+            android:textAlignment="center"
+            android:textColor="@color/g_blue"
+            app:layout_constraintBottom_toBottomOf="@id/registerGuideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/textGuideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.17" />
+            app:layout_constraintGuide_percent="0.15" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/registerGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePageLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.09" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePageRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.91" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
