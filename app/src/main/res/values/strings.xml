@@ -17,4 +17,5 @@
     <string name="registerPageCreateAccount">Create an account:</string>
     <string name="fullNameEditHint">Full Name</string>
     <string name="registerPageRegisterButtonText">Register</string>
+    <string name="RegisterPageLoginHere">Do you have an account? log in here!</string>
 </resources>

@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="@string/loginPageRegisterHere"
+            android:text="@string/RegisterPageLoginHere"
             android:textAlignment="center"
             android:textColor="@color/g_blue"
             app:layout_constraintBottom_toBottomOf="@id/registerGuideline"
