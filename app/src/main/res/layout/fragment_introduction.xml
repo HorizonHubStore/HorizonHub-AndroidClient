@@ -67,6 +67,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         style="@style/blueButtonStyle"
+        android:id="@+id/buttonStartIntroduction"
         android:layout_width="@dimen/smallButtonWidth"
         android:layout_height="@dimen/smallButtonHeight"
         android:text="@string/introductionStartButton"
