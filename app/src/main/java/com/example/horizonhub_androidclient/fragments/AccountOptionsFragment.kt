@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.databinding.FragmentAccountOptionsBinding
-import com.example.horizonhub_androidclient.databinding.FragmentIntroductionBinding
 
 class AccountOptionsFragment : Fragment(R.layout.fragment_account_options) {
     private lateinit var binding: FragmentAccountOptionsBinding

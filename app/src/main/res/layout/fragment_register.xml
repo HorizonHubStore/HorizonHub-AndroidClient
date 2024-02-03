@@ -89,6 +89,7 @@
             android:id="@+id/registerPageRegisterButton"
             style="@style/blueButtonStyle"
             android:layout_height="@dimen/smallButtonHeight"
+            android:layout_width="0dp"
             android:layout_margin="@dimen/buttonLoginAccountOptionsMargin"
             android:text="@string/registerPageRegisterButtonText"
             app:layout_constraintBottom_toTopOf="@id/tvDoNotHaveAccountYet"
