@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/guidelineLeftTexture"
         app:layout_constraintDimensionRatio="1:3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/texture" />
 
     <ImageView
         android:id="@+id/ellipse"
@@ -26,7 +27,8 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="@id/guidelineEllipseRight"
         app:layout_constraintStart_toStartOf="@id/guidelineEllipseLeft"
-        app:layout_constraintTop_toTopOf="@id/guidelineEllipseTop" />
+        app:layout_constraintTop_toTopOf="@id/guidelineEllipseTop"
+        android:contentDescription="@string/texture" />
 
     <ImageView
         android:id="@+id/rightTexture"
@@ -34,7 +36,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/texture_right"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guidelineLeftTexture" />
+        app:layout_constraintTop_toBottomOf="@id/guidelineLeftTexture"
+        android:contentDescription="@string/texture" />
 
     <TextView
         android:id="@+id/tvRightAddressForShopping"

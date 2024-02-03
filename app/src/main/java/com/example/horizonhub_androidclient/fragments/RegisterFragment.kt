@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
-import com.example.horizonhub_androidclient.databinding.FragmentLoginBinding
 import com.example.horizonhub_androidclient.databinding.FragmentRegisterBinding
 
-class RegisterFragment : Fragment(R.layout.fragment_register){
+class RegisterFragment : Fragment(R.layout.fragment_register) {
     private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(
