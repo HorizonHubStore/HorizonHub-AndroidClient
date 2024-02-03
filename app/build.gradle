@@ -37,6 +37,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures{
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -63,6 +67,7 @@ dependencies {
     implementation 'com.shuhart.stepview:stepview:1.5.1'
     //Android Ktx
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
+    implementation 'androidx.databinding:viewbinding:8.2.2'
 
     //Dagger hilt
     implementation 'com.google.dagger:hilt-android:2.50'
