@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/blurry_background" />
+        android:src="@drawable/blurry_background"
+        android:contentDescription="@string/blurry_background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -49,7 +50,8 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping" />
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping"
+            android:autofillHints="name" />
 
         <EditText
             android:id="@+id/etEmailRegister"
@@ -59,7 +61,8 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/etFullNameRegister" />
+            app:layout_constraintTop_toBottomOf="@id/etFullNameRegister"
+            android:autofillHints="emailAddress" />
 
         <EditText
             android:id="@+id/etPasswordRegister"
@@ -70,7 +73,8 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/etEmailRegister" />
+            app:layout_constraintTop_toBottomOf="@id/etEmailRegister"
+            android:autofillHints="password" />
 
 
         <TextView

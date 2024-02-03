@@ -47,7 +47,8 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping" />
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping"
+            android:autofillHints="emailAddress" />
 
         <EditText
             android:id="@+id/etPasswordLogin"
@@ -58,7 +59,8 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/etEmailLogin" />
+            app:layout_constraintTop_toBottomOf="@id/etEmailLogin"
+            android:autofillHints="password" />
 
 
         <TextView
