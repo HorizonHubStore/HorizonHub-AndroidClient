@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/blurry_background" />
+        android:src="@drawable/blurry_background"
+        android:contentDescription="@string/blurry_background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -55,8 +56,9 @@
             app:layout_constraintStart_toStartOf="@+id/tvRightAddressForShopping"
             app:layout_constraintTop_toBottomOf="@+id/tvRightAddressForShopping" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/buttonRegisterAccountOptions"
+            app:backgroundTint="@null"
             style="@style/blueButtonStyle"
             android:layout_width="@dimen/smallButtonWidth"
             android:layout_height="@dimen/smallButtonHeight"
@@ -67,8 +69,9 @@
             app:layout_constraintTop_toBottomOf="@id/tvQuality"
             app:layout_constraintVertical_bias="0.3" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/buttonLoginAccountOptions"
+            app:backgroundTint="@null"
             style="@style/whiteButtonStyle"
             android:layout_width="@dimen/smallButtonWidth"
             android:layout_height="@dimen/smallButtonHeight"
