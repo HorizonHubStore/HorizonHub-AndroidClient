@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/blurry_background" />
+        android:src="@drawable/blurry_background"
+        android:contentDescription="@string/blurry_background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -47,7 +48,8 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping" />
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping"
+            android:autofillHints="emailAddress" />
 
         <EditText
             android:id="@+id/etPasswordLogin"
@@ -58,7 +60,8 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/etEmailLogin" />
+            app:layout_constraintTop_toBottomOf="@id/etEmailLogin"
+            android:autofillHints="password" />
 
 
         <TextView
@@ -73,10 +76,11 @@
             app:layout_constraintStart_toStartOf="@+id/guidelinePageLeft"
             app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/buttonLoginAccountOptions"
             style="@style/blueButtonStyle"
             android:layout_height="@dimen/smallButtonHeight"
+            android:layout_width="0dp"
             android:layout_margin="@dimen/buttonLoginAccountOptionsMargin"
             android:text="@string/accountOptionsPageLoginButtonText"
             app:layout_constraintBottom_toTopOf="@id/tvDoNotHaveAccountYet"
