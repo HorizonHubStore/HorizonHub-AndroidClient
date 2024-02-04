@@ -49,8 +49,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         }
     }
     private fun registerUser(fullName: String, email: String, password: String) {
+        binding.progressBarRegister.visibility = View.VISIBLE // Show ProgressBar
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
+                binding.progressBarRegister.visibility = View.GONE // Hide ProgressBar
+
                 if (task.isSuccessful) {
                     // Registration success, navigate to the next screen or perform other actions
                     Log.d("RegisterFragment", "User registration successful")
