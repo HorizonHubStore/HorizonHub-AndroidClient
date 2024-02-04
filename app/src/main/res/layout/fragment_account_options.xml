@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/blurry_background"
+        android:contentDescription="@string/blurry_background" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/h3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="6dp"
+            android:text="@string/storeName"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_horizon_hub_shape"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textGuideline" />
+
+        <TextView
+            android:id="@+id/tvRightAddressForShopping"
+            style="@style/h4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="@string/IntroductionTitle"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+
+
+        <TextView
+            android:id="@+id/tvQuality"
+            style="@style/h2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="@string/quality"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/tvRightAddressForShopping"
+            app:layout_constraintStart_toStartOf="@+id/tvRightAddressForShopping"
+            app:layout_constraintTop_toBottomOf="@+id/tvRightAddressForShopping" />
+
+        <Button
+            android:id="@+id/buttonRegisterAccountOptions"
+            app:backgroundTint="@null"
+            style="@style/blueButtonStyle"
+            android:layout_width="@dimen/smallButtonWidth"
+            android:layout_height="@dimen/smallButtonHeight"
+            android:text="@string/accountOptionsPageRegisterButtonText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tvQuality"
+            app:layout_constraintStart_toStartOf="@id/tvQuality"
+            app:layout_constraintTop_toBottomOf="@id/tvQuality"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <Button
+            android:id="@+id/buttonLoginAccountOptions"
+            app:backgroundTint="@null"
+            style="@style/whiteButtonStyle"
+            android:layout_width="@dimen/smallButtonWidth"
+            android:layout_height="@dimen/smallButtonHeight"
+            android:layout_margin="10dp"
+            android:text="@string/accountOptionsPageLoginButtonText"
+            app:layout_constraintEnd_toEndOf="@id/tvQuality"
+            app:layout_constraintStart_toStartOf="@id/tvQuality"
+            app:layout_constraintTop_toBottomOf="@id/buttonRegisterAccountOptions" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/textGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.17" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
