@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
+import com.example.horizonhub_androidclient.data.UserViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
