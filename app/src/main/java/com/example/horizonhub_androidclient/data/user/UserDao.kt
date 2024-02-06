@@ -1,4 +1,4 @@
-package com.example.horizonhub_androidclient.data
+package com.example.horizonhub_androidclient.data.user
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

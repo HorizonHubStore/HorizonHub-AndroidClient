@@ -1,5 +1,4 @@
-// UserDatabase.kt
-package com.example.horizonhub_androidclient.data
+package com.example.horizonhub_androidclient.data.user
 
 import android.content.Context
 import androidx.room.Database

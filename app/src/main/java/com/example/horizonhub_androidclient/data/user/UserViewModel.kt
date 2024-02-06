@@ -1,5 +1,4 @@
-// UserViewModel.kt
-package com.example.horizonhub_androidclient.data
+package com.example.horizonhub_androidclient.data.user
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
