@@ -24,7 +24,7 @@
 
 
     <TextView
-        android:id="@+id/tvEmail"
+        android:id="@+id/tvFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnEditProfileImage"
@@ -34,15 +34,27 @@
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvEmail"
+        android:id="@+id/btnShareGamePost"
+        android:layout_width="221dp"
+        android:layout_height="63dp"
+        android:layout_alignTop="@+id/tvFullName"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="396dp"
-        android:layout_marginEnd="163dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="211dp"
+        android:layout_marginEnd="92dp"
+        android:text="Share new game" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnShareGamePost"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="147dp"
+        android:layout_marginTop="197dp"
+        android:layout_marginEnd="139dp"
         android:text="Logout" />
 
     <!-- Add more profile details as needed -->
