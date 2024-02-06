@@ -25,15 +25,12 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         recyclerView = view.findViewById(R.id.recyclerViewGamePosts)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
-        gamePostAdapter = GamePostAdapter(emptyList()) // Initialize with an empty list
+        gamePostAdapter = GamePostAdapter(emptyList())
         recyclerView.adapter = gamePostAdapter
 
-        // Initialize the ViewModel
         gamePostViewModel = ViewModelProvider(this).get(GamePostViewModel::class.java)
 
-        // Observe changes in allPosts LiveData
         gamePostViewModel.allPosts.observe(viewLifecycleOwner) { gamePosts ->
-            // Update the RecyclerView adapter with the new list of game posts
             gamePostAdapter.updateData(gamePosts)
         }
 

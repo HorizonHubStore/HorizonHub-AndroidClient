@@ -53,10 +53,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     }
 
     private fun registerUser(fullName: String, email: String, password: String) {
-        binding.progressBarRegister.visibility = View.VISIBLE // Show ProgressBar
+        binding.progressBarRegister.visibility = View.VISIBLE
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
-                binding.progressBarRegister.visibility = View.GONE // Hide ProgressBar
+                binding.progressBarRegister.visibility = View.GONE
 
                 if (task.isSuccessful) {
                     Log.d("RegisterFragment", "User registration successful")
@@ -69,9 +69,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     mUserViewModel.addUserToLocalDatabase(user)
 
                     findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-                    // You can navigate to the next screen here if needed
                 } else {
-                    // If registration fails, display a message to the user.
                     Log.w("RegisterFragment", "User registration failed: ${task.exception?.message}")
                     Toast.makeText(
                         requireContext(),

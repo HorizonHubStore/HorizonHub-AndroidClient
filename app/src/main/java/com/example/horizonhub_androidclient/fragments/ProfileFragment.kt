@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
+import com.example.horizonhub_androidclient.activities.HomeActivity
+import com.example.horizonhub_androidclient.activities.LoginRegisterActivity
 import com.example.horizonhub_androidclient.data.user.UserViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -58,20 +60,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 if (user.profileImage.isEmpty()) {
                     binding.profileImage.setImageResource(R.drawable.default_user_profile)
                 } else {
-                    // Load the user's custom profile image
                     Picasso.get().load(user.profileImage).into(binding.profileImage)
                 }
             }
 
         }
 
-        binding.btnShareGamePost.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_gamePostFragment)
-        }
 
         binding.btnLogout.setOnClickListener {
             auth.signOut()
-            findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
+            val intent = Intent(requireActivity(), LoginRegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -10,36 +10,35 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
 
-    private val fragment1 = ProfileFragment()
-    private val fragment2 = AllPostsFragment()
-    private val fragment3 = GamePostFragment()
+    private val profileFragment = ProfileFragment()
+    private val allPostsFragment = AllPostsFragment()
+    private val gamePostFragment = GamePostFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // Load the first fragment initially
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment1)
+            .replace(R.id.fragment_container, profileFragment)
             .commit()
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.menu_item_1 -> {
+                R.id.profile -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment1)
+                        .replace(R.id.fragment_container, profileFragment)
                         .commit()
                     true
                 }
-                R.id.menu_item_2 -> {
+                R.id.addPost -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment2)
+                        .replace(R.id.fragment_container, gamePostFragment)
                         .commit()
                     true
                 }
-                R.id.menu_item_3 -> {
+                R.id.allPosts -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, fragment3)
+                        .replace(R.id.fragment_container, allPostsFragment)
                         .commit()
                     true
                 }

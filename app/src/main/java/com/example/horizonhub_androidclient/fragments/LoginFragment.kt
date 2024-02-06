@@ -51,14 +51,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun signInWithEmailAndPassword(email: String, password: String) {
-        binding.progressBarLogin.visibility = View.VISIBLE // Show ProgressBar
+        binding.progressBarLogin.visibility = View.VISIBLE
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
-                binding.progressBarLogin.visibility = View.GONE // Hide ProgressBar
+                binding.progressBarLogin.visibility = View.GONE
 
                 if (task.isSuccessful) {
-                    // Sign in success, navigate to the ProfileFragment and pass user data as arguments
                     val intent = Intent(requireActivity(), HomeActivity::class.java)
                     startActivity(intent)
 
