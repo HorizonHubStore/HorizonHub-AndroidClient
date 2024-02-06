@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
-import com.example.horizonhub_androidclient.data.User
-import com.example.horizonhub_androidclient.data.UserViewModel
+import com.example.horizonhub_androidclient.data.user.User
+import com.example.horizonhub_androidclient.data.user.UserViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 
