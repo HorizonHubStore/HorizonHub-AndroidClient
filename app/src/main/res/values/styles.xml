@@ -3,7 +3,7 @@
 
     <style name="h4">
         <item name="android:fontFamily">@font/poppins_thin</item>
-        <item name="android:textColor">@color/g_black</item>
+        <item name="android:textColor">@color/secondary_text</item>
         <item name="android:textSize">@dimen/h4TextSize</item>
     </style>
 
@@ -15,7 +15,7 @@
 
     <style name="h3">
         <item name="android:fontFamily">@font/poppins_light</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/primary_text</item>
         <item name="android:textSize">@dimen/h3TextSize</item>
     </style>
 
