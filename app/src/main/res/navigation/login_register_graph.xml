@@ -37,12 +37,6 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_profileFragment"
-            app:destination="@id/profileFragment">
-
-        </action>
-
 
     </fragment>
     <fragment
@@ -53,30 +47,6 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.example.horizonhub_androidclient.fragments.ProfileFragment"
-        android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_profileFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_gamePostFragment"
-            app:destination="@id/gamePostFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/gamePostFragment"
-        android:name="com.example.horizonhub_androidclient.fragments.GamePostFragment"
-        android:label="gamePostFragment"
-        tools:layout="@layout/fragment_game_post">
-    </fragment>
-    <fragment
-        android:id="@+id/allPostsFragment"
-        android:name="com.example.horizonhub_androidclient.fragments.AllPostsFragment"
-        android:label="allPostsFragment"
-        tools:layout="@layout/fragment_all_posts">
     </fragment>
 
 
