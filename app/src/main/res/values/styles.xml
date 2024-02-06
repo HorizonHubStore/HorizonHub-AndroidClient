@@ -9,7 +9,7 @@
 
     <style name="h2">
         <item name="android:fontFamily">@font/poppins_light</item>
-        <item name="android:textColor">@color/g_gray700</item>
+        <item name="android:textColor">@color/secondary_text</item>
         <item name="android:textSize">@dimen/h2TextSize</item>
     </style>
 

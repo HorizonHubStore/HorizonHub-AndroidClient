@@ -5,7 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="IntroductionTitle">The VideoGame Store\nfor AI generated Games</string>
     <string name="quality">enjoy the best Video Games\ncreated with AI tools</string>
-    <string name="introductionStartButton">start</string>
+    <string name="introductionStartButton">Let\'s Start</string>
     <string name="storeName">Horizon Hub</string>
     <string name="accountOptionsPageRegisterButtonText">Register</string>
     <string name="accountOptionsPageLoginButtonText">Login</string>
