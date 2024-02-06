@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.horizonhub_androidclient.R
@@ -56,18 +57,24 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
                 uploadImageToFirebaseStorage(){downloadUri ->
                     val gamePost = GamePost(creator = uid, gameName=gameName, gameImage =  downloadUri.toString(), description =  description, price =  recommendedPrice)
                     mGamePostViewModel.addGamePostToLocalDatabase(gamePost)
+                    resetAllFields()
                 }
             } else {
                 Log.d("GamePostFragment", "No image selected")
             }
         }
     }
+    private fun resetAllFields(){
+        binding.editTextGameName.setText("")
+        binding.editTextDescription.setText("")
+        binding.editTextPrice.setText("")
+        binding.imageViewPickedImage.setImageResource(0) // Clear image
+        selectedImageUri = null // Clear selected image URI
 
-    private fun openGalleryForImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        // Show success toast
+        Toast.makeText(requireContext(), "Post uploaded successfully", Toast.LENGTH_SHORT).show()
     }
+
 
     private fun uploadImageToFirebaseStorage(callback: (Uri?) -> Unit) {
         val imageName = "game_image_${System.currentTimeMillis()}.jpg"
@@ -78,16 +85,23 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
                 if (task.isSuccessful) {
                     imageRef.downloadUrl.addOnSuccessListener { downloadUri ->
 
-                        callback(downloadUri) // Pass the downloadUri to the callback
+                        callback(downloadUri)
                     }.addOnFailureListener { e ->
                         Log.e("GamePostFragment", "Error getting download URL: ${e.message}")
-                        callback(null) // Pass null to the callback in case of failure
+                        callback(null)
                     }
                 } else {
                     Log.e("GamePostFragment", "Error uploading image: ${task.exception?.message}")
-                    callback(null) // Pass null to the callback in case of failure
+                    callback(null)
                 }
             }
+
+    }
+
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
 
 
