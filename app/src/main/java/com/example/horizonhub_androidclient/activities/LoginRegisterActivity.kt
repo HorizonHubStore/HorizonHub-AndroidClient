@@ -1,17 +1,35 @@
 package com.example.horizonhub_androidclient.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.horizonhub_androidclient.R
+import com.example.horizonhub_androidclient.data.user.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginRegisterActivity : AppCompatActivity() {
+    private lateinit var mUserViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_register)
+
+        mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        mUserViewModel.getAuthState().observe(this) { authState ->
+            authState?.let { // Ensure authState is not null
+                if (it.isLoggedIn) {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    setContentView(R.layout.activity_login_register)
+                }
+            }
+        }
 
 
     }
+
+
 }

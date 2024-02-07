@@ -8,15 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.activities.HomeActivity
+import com.example.horizonhub_androidclient.data.auth.AuthState
+import com.example.horizonhub_androidclient.data.user.UserViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var mUserViewModel: UserViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +36,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mUserViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
         auth = FirebaseAuth.getInstance()
 
@@ -62,6 +70,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 binding.progressBarLogin.visibility = View.GONE
 
                 if (task.isSuccessful) {
+                    val firebaseUser = auth.currentUser
+                    val uid = firebaseUser?.uid ?: ""
+                    val authState = AuthState(1,true,uid)
+                    lifecycleScope.launch {
+                        mUserViewModel.updateAuthState(authState)
+                    }
+
                     val intent = Intent(requireActivity(), HomeActivity::class.java)
                     startActivity(intent)
 

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.activities.LoginRegisterActivity
+import com.example.horizonhub_androidclient.data.auth.AuthState
 import com.example.horizonhub_androidclient.data.user.UserViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -67,6 +68,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding.btnLogout.setOnClickListener {
             auth.signOut()
+
+            val authState = AuthState(1,false,"")
+            lifecycleScope.launch {
+                mUserViewModel.updateAuthState(authState)
+            }
             val intent = Intent(requireActivity(), LoginRegisterActivity::class.java)
             startActivity(intent)
         }
