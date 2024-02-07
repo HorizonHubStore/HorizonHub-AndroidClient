@@ -4,17 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/blurry_background"
-        android:contentDescription="@string/blurry_background" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:id="@+id/tvAppName"
@@ -24,9 +16,8 @@
             android:drawablePadding="6dp"
             android:text="@string/storeName"
             android:textStyle="bold"
-            app:drawableStartCompat="@drawable/ic_horizon_hub_shape"
-            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
-            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textGuideline" />
 
         <TextView
@@ -34,10 +25,9 @@
             style="@style/h4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:text="@string/registerPageCreateAccount"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
             app:layout_constraintTop_toBottomOf="@id/tvAppName" />
 
@@ -115,13 +105,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/textGuideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.07" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/registerGuideline"

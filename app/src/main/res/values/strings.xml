@@ -20,4 +20,7 @@
     <string name="RegisterPageLoginHere">Do you have an account? log in here!</string>
     <string name="blurry_background">blurry_background</string>
     <string name="texture">Texture</string>
+    <string name="profile_image">profileImage</string>
+    <string name="edit_profile_image">Edit Profile Image</string>
+    <string name="logout">Logout</string>
 </resources>
