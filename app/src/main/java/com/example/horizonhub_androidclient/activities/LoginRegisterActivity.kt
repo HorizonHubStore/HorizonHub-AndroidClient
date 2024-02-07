@@ -2,7 +2,6 @@ package com.example.horizonhub_androidclient.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.horizonhub_androidclient.R
@@ -18,18 +17,14 @@ class LoginRegisterActivity : AppCompatActivity() {
 
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         mUserViewModel.getAuthState().observe(this) { authState ->
-            authState?.let { // Ensure authState is not null
-                if (it.isLoggedIn) {
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    setContentView(R.layout.activity_login_register)
-                }
+            if (authState != null && authState.isLoggedIn) {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+            } else {
+                setContentView(R.layout.activity_login_register)
             }
         }
 
 
     }
-
-
 }
