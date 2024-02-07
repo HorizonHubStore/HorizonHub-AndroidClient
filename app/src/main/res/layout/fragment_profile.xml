@@ -1,51 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Add these lines to your existing layout -->
-    <ImageView
-        android:id="@+id/profileImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/default_user_profile"
-        android:contentDescription="profileImage" />
 
-    <Button
-        android:id="@+id/btnEditProfileImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profileImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:text="Edit Profile Image" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/profile_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/default_user_profile"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@id/textGuideline" />
 
-    <TextView
-        android:id="@+id/tvFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnEditProfileImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:text=""
-        android:textSize="16sp" />
+        <Button
+            android:id="@+id/btnEditProfileImage"
+            style="@style/blueButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profileImage"
+            android:layout_marginTop="8dp"
+            android:text="@string/edit_profile_image"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@id/profileImage" />
 
+        <TextView
+            android:id="@+id/tvFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:text=""
+            app:layout_constraintTop_toBottomOf="@id/btnEditProfileImage"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft" />
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvFullName"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="364dp"
-        android:layout_marginEnd="136dp"
-        android:text="Logout" />
+        <Button
+            android:id="@+id/btnLogout"
+            style="@style/blueButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            app:layout_constraintBottom_toTopOf="@id/bottomPageGuideline"
+            app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft" />
 
-    <!-- Add more profile details as needed -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/textGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07" />
 
-</RelativeLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottomPageGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.93" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePageLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.30" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePageRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.70" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

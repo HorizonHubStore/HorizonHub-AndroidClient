@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/blurry_background"
-        android:contentDescription="@string/blurry_background" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,7 +17,6 @@
             android:drawablePadding="6dp"
             android:text="@string/storeName"
             android:textStyle="bold"
-            app:drawableStartCompat="@drawable/ic_horizon_hub_shape"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textGuideline" />
@@ -33,7 +26,7 @@
             style="@style/h4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/IntroductionTitle"
             android:textAlignment="center"
@@ -41,6 +34,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+
+        <ImageView
+            android:id="@+id/ellipse"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/texture"
+            android:scaleType="centerCrop"
+            android:src="@drawable/horizon_hub_logo"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEllipseRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineEllipseLeft"
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping" />
 
 
         <TextView
@@ -54,7 +59,7 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/tvRightAddressForShopping"
             app:layout_constraintStart_toStartOf="@+id/tvRightAddressForShopping"
-            app:layout_constraintTop_toBottomOf="@+id/tvRightAddressForShopping" />
+            app:layout_constraintTop_toBottomOf="@+id/ellipse" />
 
         <Button
             android:id="@+id/buttonRegisterAccountOptions"
@@ -86,7 +91,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.17" />
+            app:layout_constraintGuide_percent="0.07" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEllipseRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEllipseLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
