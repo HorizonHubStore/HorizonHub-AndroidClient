@@ -51,30 +51,31 @@
             app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping"
             android:autofillHints="emailAddress" />
 
+
         <EditText
             android:id="@+id/etPasswordLogin"
             android:layout_width="0dp"
             android:layout_height="@dimen/editTextHeight"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
+            android:autofillHints="password"
             android:hint="@string/passwordEditHint"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/etEmailLogin"
-            android:autofillHints="password" />
+            app:layout_constraintTop_toBottomOf="@id/etEmailLogin" />
 
-
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            style="@style/h2"
+        <ProgressBar
+            android:id="@+id/progressBarLogin"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="@string/forgotPasswordLogin"
-            android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="@+id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/buttonLoginAccountOptions"
@@ -86,7 +87,7 @@
             app:layout_constraintBottom_toTopOf="@id/tvDoNotHaveAccountYet"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
+             />
 
         <TextView
             android:id="@+id/tvDoNotHaveAccountYet"
@@ -101,6 +102,9 @@
             app:layout_constraintBottom_toBottomOf="@+id/registerGuideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+
+
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -122,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.09" />
+            app:layout_constraintGuide_percent="0.04" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelinePageRight"
@@ -130,6 +134,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.91" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

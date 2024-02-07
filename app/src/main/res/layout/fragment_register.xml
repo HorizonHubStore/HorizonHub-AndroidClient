@@ -76,18 +76,19 @@
             app:layout_constraintTop_toBottomOf="@id/etEmailRegister"
             android:autofillHints="password" />
 
-
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            style="@style/h2"
+        <ProgressBar
+            android:id="@+id/progressBarRegister"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:gravity="center"
-            android:text="@string/forgotPasswordLogin"
-            android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="@+id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordRegister" />
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordRegister"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/registerPageRegisterButton"
@@ -99,7 +100,7 @@
             app:layout_constraintBottom_toTopOf="@id/tvDoNotHaveAccountYet"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/tvForgotPassword" />
+            app:layout_constraintTop_toBottomOf="@id/progressBarRegister" />
 
         <TextView
             android:id="@+id/tvDoNotHaveAccountYet"

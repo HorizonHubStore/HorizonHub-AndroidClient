@@ -6,4 +6,5 @@
     <dimen name="buttonCorners">5dp</dimen>
     <dimen name="editTextHeight">60dp</dimen>
     <dimen name="buttonLoginAccountOptionsMargin">10dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

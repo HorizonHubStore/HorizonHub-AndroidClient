@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="profile"
+        android:id="@+id/profile"
+        android:icon="@drawable/baseline_account_circle_24"
+        />
+    <item
+        android:title="addPost"
+        android:id="@+id/addPost"
+        android:icon="@drawable/baseline_post_add_24"
+        />
+    <item
+        android:title="allPosts"
+        android:id="@+id/allPosts"
+        android:icon="@drawable/baseline_post_add_24"
+        />
+    <item
+        android:title="news"
+        android:id="@+id/news"
+        android:icon="@drawable/baseline_post_add_24"
+        />
+</menu>
+
