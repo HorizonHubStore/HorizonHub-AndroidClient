@@ -65,4 +65,10 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="game_name">Game Name</string>
+    <string name="upload_picture">Upload Picture</string>
+    <string name="game_image">Game Image</string>
+    <string name="game_description">Game Description (at least 60 words)</string>
+    <string name="recommended_price">Recommended Price</string>
+    <string name="add_post">Add Post</string>
 </resources>
