@@ -54,8 +54,14 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
             val uid = firebaseUser?.uid ?: ""
 
             if (selectedImageUri != null) {
-                uploadImageToFirebaseStorage(){downloadUri ->
-                    val gamePost = GamePost(creator = uid, gameName=gameName, gameImage =  downloadUri.toString(), description =  description, price =  recommendedPrice)
+                uploadImageToFirebaseStorage() { downloadUri ->
+                    val gamePost = GamePost(
+                        creator = uid,
+                        gameName = gameName,
+                        gameImage = downloadUri.toString(),
+                        description = description,
+                        price = recommendedPrice
+                    )
                     mGamePostViewModel.addGamePostToLocalDatabase(gamePost)
                     resetAllFields()
                 }
@@ -64,7 +70,8 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
             }
         }
     }
-    private fun resetAllFields(){
+
+    private fun resetAllFields() {
         binding.editTextGameName.setText("")
         binding.editTextDescription.setText("")
         binding.editTextPrice.setText("")
@@ -103,9 +110,6 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
         intent.type = "image/*"
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
-
-
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

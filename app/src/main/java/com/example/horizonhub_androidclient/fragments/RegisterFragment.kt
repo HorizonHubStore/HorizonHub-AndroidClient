@@ -47,7 +47,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             if (fullName.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
                 registerUser(fullName, email, password)
             } else {
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -64,13 +65,16 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
                     val firebaseUser = auth.currentUser
                     val uid = firebaseUser?.uid ?: ""
-                    val user = User(uid,email, fullName, "")
+                    val user = User(uid, email, fullName, "")
 
                     mUserViewModel.addUserToLocalDatabase(user)
 
                     findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 } else {
-                    Log.w("RegisterFragment", "User registration failed: ${task.exception?.message}")
+                    Log.w(
+                        "RegisterFragment",
+                        "User registration failed: ${task.exception?.message}"
+                    )
                     Toast.makeText(
                         requireContext(),
                         "Registration failed. ${task.exception?.message}",

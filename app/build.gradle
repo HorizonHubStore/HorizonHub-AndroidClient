@@ -51,6 +51,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-auth:22.3.1'
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation("com.google.firebase:firebase-storage")
     implementation 'com.google.firebase:firebase-storage-ktx:20.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
     implementation 'com.google.firebase:firebase-auth-ktx:22.3.1'
@@ -73,11 +75,9 @@ dependencies {
     //Android Ktx
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
     implementation 'androidx.databinding:viewbinding:8.2.2'
-
     //Dagger hilt
     implementation 'com.google.dagger:hilt-android:2.50'
     kapt 'com.google.dagger:hilt-compiler:2.50'
-
 
     def room_version = "2.6.1"
 
@@ -86,13 +86,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
-
     implementation 'com.squareup.picasso:picasso:2.71828'
-
-
-
-
-
     // For local unit tests
     testImplementation 'com.google.dagger:hilt-android-testing:2.50'
     testAnnotationProcessor 'com.google.dagger:hilt-compiler:2.50'

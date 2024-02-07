@@ -12,9 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
-import com.example.horizonhub_androidclient.activities.HomeActivity
 import com.example.horizonhub_androidclient.activities.LoginRegisterActivity
 import com.example.horizonhub_androidclient.data.user.UserViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentProfileBinding
@@ -110,7 +108,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             }
 
     }
-
 
 
 }

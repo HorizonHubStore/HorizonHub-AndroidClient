@@ -24,8 +24,8 @@
         android:gravity="center"
         android:text="@string/storeName"
         android:textAlignment="center"
-        android:textSize="35sp"
         android:textColor="@color/primary_text"
+        android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="@+id/introductionImage"
         app:layout_constraintStart_toStartOf="@+id/introductionImage"
         app:layout_constraintTop_toBottomOf="@id/introductionImage" />

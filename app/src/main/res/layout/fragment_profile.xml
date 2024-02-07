@@ -41,9 +41,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
             android:text=""
-            app:layout_constraintTop_toBottomOf="@id/btnEditProfileImage"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
-            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft" />
+            app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
+            app:layout_constraintTop_toBottomOf="@id/btnEditProfileImage" />
 
         <Button
             android:id="@+id/btnLogout"

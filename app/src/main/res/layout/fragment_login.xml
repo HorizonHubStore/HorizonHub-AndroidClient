@@ -36,12 +36,12 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="50dp"
+            android:autofillHints="emailAddress"
             android:hint="@string/emailEditHint"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping"
-            android:autofillHints="emailAddress" />
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping" />
 
         <EditText
             android:id="@+id/etPasswordLogin"
@@ -60,18 +60,18 @@
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/buttonLoginAccountOptions"
             style="@style/blueButtonStyle"
-            android:layout_height="@dimen/smallButtonHeight"
             android:layout_width="0dp"
+            android:layout_height="@dimen/smallButtonHeight"
             android:layout_margin="@dimen/buttonLoginAccountOptionsMargin"
             android:text="@string/accountOptionsPageLoginButtonText"
             app:layout_constraintBottom_toTopOf="@id/tvDoNotHaveAccountYet"

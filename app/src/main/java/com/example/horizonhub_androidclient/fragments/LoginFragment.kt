@@ -43,7 +43,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 signInWithEmailAndPassword(email, password)
             } else {
-                Toast.makeText(requireContext(), "Email and Password are a must.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Email and Password are a must.",
+                    Toast.LENGTH_SHORT
+                ).show()
 
             }
         }

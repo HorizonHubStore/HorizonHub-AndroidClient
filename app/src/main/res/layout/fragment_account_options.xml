@@ -63,11 +63,11 @@
 
         <Button
             android:id="@+id/buttonRegisterAccountOptions"
-            app:backgroundTint="@null"
             style="@style/blueButtonStyle"
             android:layout_width="@dimen/smallButtonWidth"
             android:layout_height="@dimen/smallButtonHeight"
             android:text="@string/accountOptionsPageRegisterButtonText"
+            app:backgroundTint="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tvQuality"
             app:layout_constraintStart_toStartOf="@id/tvQuality"
@@ -76,12 +76,12 @@
 
         <Button
             android:id="@+id/buttonLoginAccountOptions"
-            app:backgroundTint="@null"
             style="@style/whiteButtonStyle"
             android:layout_width="@dimen/smallButtonWidth"
             android:layout_height="@dimen/smallButtonHeight"
             android:layout_margin="10dp"
             android:text="@string/accountOptionsPageLoginButtonText"
+            app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="@id/tvQuality"
             app:layout_constraintStart_toStartOf="@id/tvQuality"
             app:layout_constraintTop_toBottomOf="@id/buttonRegisterAccountOptions" />

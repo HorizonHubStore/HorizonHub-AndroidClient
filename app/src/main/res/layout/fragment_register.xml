@@ -36,55 +36,54 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="50dp"
+            android:autofillHints="name"
             android:hint="@string/fullNameEditHint"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping"
-            android:autofillHints="name" />
+            app:layout_constraintTop_toBottomOf="@id/tvRightAddressForShopping" />
 
         <EditText
             android:id="@+id/etEmailRegister"
             android:layout_width="0dp"
             android:layout_height="@dimen/editTextHeight"
+            android:autofillHints="emailAddress"
             android:hint="@string/emailEditHint"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/etFullNameRegister"
-            android:autofillHints="emailAddress" />
+            app:layout_constraintTop_toBottomOf="@id/etFullNameRegister" />
 
         <EditText
             android:id="@+id/etPasswordRegister"
             android:layout_width="0dp"
             android:layout_height="@dimen/editTextHeight"
             android:layout_marginTop="15dp"
+            android:autofillHints="password"
             android:hint="@string/passwordEditHint"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@id/guidelinePageRight"
             app:layout_constraintStart_toStartOf="@id/guidelinePageLeft"
-            app:layout_constraintTop_toBottomOf="@id/etEmailRegister"
-            android:autofillHints="password" />
+            app:layout_constraintTop_toBottomOf="@id/etEmailRegister" />
 
         <ProgressBar
             android:id="@+id/progressBarRegister"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordRegister"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordRegister" />
 
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/registerPageRegisterButton"
             style="@style/blueButtonStyle"
-            android:layout_height="@dimen/smallButtonHeight"
             android:layout_width="0dp"
+            android:layout_height="@dimen/smallButtonHeight"
             android:layout_margin="@dimen/buttonLoginAccountOptionsMargin"
             android:text="@string/registerPageRegisterButtonText"
             app:layout_constraintBottom_toTopOf="@id/tvDoNotHaveAccountYet"
