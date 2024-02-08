@@ -6,11 +6,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "game_post_table")
 data class GamePost(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int=0,
+    @PrimaryKey
+    val id: String,
     val creator:String,
     val gameName: String,
-    val gameImage: String,
+    val gameImage: ByteArray?,
     val description: String,
-    val price: String,
+    val price: Long,
 )
