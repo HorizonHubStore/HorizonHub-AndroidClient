@@ -19,4 +19,8 @@ class GamePostRepository(private val gamePostDao: GamePostDao) {
     suspend fun updateGamePostImage(gamePostId: String, newProfileImage: String) {
         gamePostDao.updateGamePostImage(gamePostId, newProfileImage)
     }
+
+    fun getPostsByUser(userId: String): LiveData<List<GamePost>> {
+        return gamePostDao.getPostsByUser(userId)
+    }
 }
