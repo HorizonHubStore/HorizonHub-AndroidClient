@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.fragments.AllPostsFragment
 import com.example.horizonhub_androidclient.fragments.GamePostFragment
-import com.example.horizonhub_androidclient.fragments.GamePricesFragment
+import com.example.horizonhub_androidclient.fragments.GameDealsFragment
 import com.example.horizonhub_androidclient.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -14,7 +14,7 @@ class HomeActivity : AppCompatActivity() {
     private val profileFragment = ProfileFragment()
     private val allPostsFragment = AllPostsFragment()
     private val gamePostFragment = GamePostFragment()
-    private val gamePricesFragment = GamePricesFragment()
+    private val gamePricesFragment = GameDealsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,7 +2,7 @@ package com.example.horizonhub_androidclient.helper
 
 import com.google.gson.annotations.SerializedName
 
-data class GamePrices(
+data class GameDeal(
     @SerializedName("gameID") val id: String,
     @SerializedName("steamAppID") val steamAppID: String?,
     @SerializedName("cheapest") val cheapest: String,

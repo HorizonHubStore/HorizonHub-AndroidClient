@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.horizonhub_androidclient.R
-import com.example.horizonhub_androidclient.helper.GameApiService
-import com.example.horizonhub_androidclient.helper.GamePrices
+import com.example.horizonhub_androidclient.helper.GameDealsApiService
+import com.example.horizonhub_androidclient.helper.GameDeal
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class GamePricesFragment : Fragment(R.layout.fragment_game_prices) {
-    private lateinit var gameApiService: GameApiService
+class GameDealsFragment : Fragment(R.layout.fragment_game_deals) {
+    private lateinit var gameApiService: GameDealsApiService
     private lateinit var editTextGameTitle: EditText
     private lateinit var recyclerViewGames: RecyclerView
     private lateinit var gameListAdapter: GameListAdapter
@@ -34,7 +34,7 @@ class GamePricesFragment : Fragment(R.layout.fragment_game_prices) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_game_prices, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_game_deals, container, false)
 
         editTextGameTitle = rootView.findViewById(R.id.editTextGameTitle)
         recyclerViewGames = rootView.findViewById(R.id.recyclerViewGames)
@@ -48,7 +48,7 @@ class GamePricesFragment : Fragment(R.layout.fragment_game_prices) {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        gameApiService = retrofit.create(GameApiService::class.java)
+        gameApiService = retrofit.create(GameDealsApiService::class.java)
 
         return rootView
     }
@@ -66,10 +66,10 @@ class GamePricesFragment : Fragment(R.layout.fragment_game_prices) {
 
     private fun getGames(title: String) {
         val call = gameApiService.getGamesByTitle(title)
-        call.enqueue(object : Callback<List<GamePrices>> {
+        call.enqueue(object : Callback<List<GameDeal>> {
             override fun onResponse(
-                call: Call<List<GamePrices>>,
-                response: Response<List<GamePrices>>
+                call: Call<List<GameDeal>>,
+                response: Response<List<GameDeal>>
             ) {
                 if (response.isSuccessful) {
                     val games = response.body()
@@ -81,7 +81,7 @@ class GamePricesFragment : Fragment(R.layout.fragment_game_prices) {
                 }
             }
 
-            override fun onFailure(call: Call<List<GamePrices>>, t: Throwable) {
+            override fun onFailure(call: Call<List<GameDeal>>, t: Throwable) {
                 // Handle network error
             }
         })
@@ -89,11 +89,11 @@ class GamePricesFragment : Fragment(R.layout.fragment_game_prices) {
 
     inner class GameListAdapter : RecyclerView.Adapter<GameListAdapter.GameViewHolder>() {
 
-        private var games: List<GamePrices> = listOf()
+        private var games: List<GameDeal> = listOf()
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.game_prices_item, parent, false)
+                .inflate(R.layout.game_deals_item, parent, false)
             return GameViewHolder(itemView)
         }
 
@@ -114,7 +114,7 @@ class GamePricesFragment : Fragment(R.layout.fragment_game_prices) {
 
         override fun getItemCount(): Int = games.size
 
-        fun submitList(newList: List<GamePrices>) {
+        fun submitList(newList: List<GameDeal>) {
             val oldSize = games.size
             games = newList
             val newSize = games.size
