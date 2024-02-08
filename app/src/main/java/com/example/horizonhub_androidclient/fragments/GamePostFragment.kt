@@ -15,7 +15,10 @@ import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.data.gamePost.GamePost
 import com.example.horizonhub_androidclient.data.gamePost.GamePostViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentGamePostBinding
+import com.example.horizonhub_androidclient.model.PostModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -25,8 +28,9 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
     private var selectedImageUri: Uri? = null
     private lateinit var mGamePostViewModel: GamePostViewModel
     private lateinit var auth: FirebaseAuth
-
     private lateinit var storageReference: StorageReference
+    private lateinit var firebaseRef: DatabaseReference
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +39,7 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
     ): View {
         binding = FragmentGamePostBinding.inflate(inflater, container, false)
         storageReference = FirebaseStorage.getInstance().reference
+        firebaseRef = FirebaseDatabase.getInstance().getReference("gamePosts")
         return binding.root
     }
 
@@ -53,22 +58,30 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
             val recommendedPrice = binding.editTextPrice.text.toString()
             val uid = firebaseUser?.uid ?: ""
 
-            if (selectedImageUri != null) {
-                uploadImageToFirebaseStorage() { downloadUri ->
-                    val gamePost = GamePost(
+            if (gameName.isNotEmpty() && description.isNotEmpty() && recommendedPrice.isNotEmpty() && selectedImageUri != null) {
+                uploadImageToFirebaseStorage { downloadUri ->
+                    // Create a new GamePost object
+                    val gamePost = PostModel(
                         creator = uid,
                         gameName = gameName,
                         gameImage = downloadUri.toString(),
                         description = description,
-                        price = recommendedPrice
+                        price = recommendedPrice.toLong()
                     )
-                    mGamePostViewModel.addGamePostToLocalDatabase(gamePost)
-                    resetAllFields()
+
+                    firebaseRef.push().setValue(gamePost)
+                        .addOnSuccessListener {
+                            resetAllFields()
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("GamePostFragment", "Error adding game post to Firebase: ${e.message}")
+                            // Show error toast or handle failure accordingly
+                        }
                 }
             } else {
-                Log.d("GamePostFragment", "No image selected")
-            }
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()            }
         }
+
     }
 
     private fun resetAllFields() {

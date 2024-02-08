@@ -1,4 +1,5 @@
 package com.example.horizonhub_androidclient.adapters
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,7 @@ class GamePostAdapter(private var gamePosts: List<GamePost>) : RecyclerView.Adap
         holder.textViewGameName.text = "Game Name: ${currentItem.gameName}"
         holder.textViewDescription.text = "Description: ${currentItem.description}"
         holder.textViewPrice.text = "Price: ${currentItem.price}"
-        Picasso.get().load(currentItem.gameImage).into(holder.imageViewGameImage)
+        holder.imageViewGameImage.setImageBitmap(currentItem.gameImage?.let { BitmapFactory.decodeByteArray(currentItem.gameImage, 0, it.size) })
     }
 
     override fun getItemCount() = gamePosts.size
