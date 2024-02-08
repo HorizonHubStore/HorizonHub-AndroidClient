@@ -11,7 +11,8 @@
         android:layout_margin="8dp"
         android:hint="@string/enter_game_title"
         android:inputType="text"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:autofillHints="name" />
 
     <ImageButton
         android:id="@+id/buttonSearch"
