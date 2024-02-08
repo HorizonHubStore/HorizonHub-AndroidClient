@@ -71,4 +71,15 @@
     <string name="game_description">Game Description (at least 60 words)</string>
     <string name="recommended_price">Recommended Price</string>
     <string name="add_post">Add Post</string>
+    <string name="enter_game_title">Enter game title</string>
+    <string name="search_games">Search for games</string>
+    <string name="game_title">Game Title</string>
+    <string name="game_id">Game ID:</string>
+    <string name="cheapest_price">Cheapest Price:</string>
+    <string name="game_id_format">Game ID: %s</string>
+    <string name="cheapest_price_format">Cheapest Price: $%s</string>
+    <string name="profile">profile</string>
+    <string name="addpost">addPost</string>
+    <string name="allposts">allPosts</string>
+    <string name="deals">deals</string>
 </resources>

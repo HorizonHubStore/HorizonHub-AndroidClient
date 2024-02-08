@@ -9,16 +9,21 @@
         android:id="@+id/profileFragment"
         android:name="com.example.horizonhub_androidclient.fragments.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"></fragment>
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/gamePostFragment"
         android:name="com.example.horizonhub_androidclient.fragments.GamePostFragment"
         android:label="gamePostFragment"
-        tools:layout="@layout/fragment_game_post"></fragment>
+        tools:layout="@layout/fragment_game_post" />
     <fragment
         android:id="@+id/allPostsFragment"
         android:name="com.example.horizonhub_androidclient.fragments.AllPostsFragment"
         android:label="allPostsFragment"
-        tools:layout="@layout/fragment_all_posts"></fragment>
+        tools:layout="@layout/fragment_all_posts" />
+    <fragment
+        android:id="@+id/CompareGamePricesFragment"
+        android:name="com.example.horizonhub_androidclient.fragments.GamePricesFragment"
+        android:label="compareGamePricesFragment"
+        tools:layout="@layout/fragment_game_prices" />
 
 </navigation>

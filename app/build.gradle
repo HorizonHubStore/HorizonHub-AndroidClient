@@ -6,11 +6,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.gms.google-services'
-    id 'com.google.dagger.hilt.android'
 }
-
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.dagger.hilt.android'
 
 android {
     namespace 'com.example.horizonhub_androidclient'
@@ -52,7 +48,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-auth:22.3.1'
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
-    implementation("com.google.firebase:firebase-storage")
+    implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-storage-ktx:20.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
     implementation 'com.google.firebase:firebase-auth-ktx:22.3.1'
@@ -77,9 +73,6 @@ dependencies {
     //Android Ktx
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
     implementation 'androidx.databinding:viewbinding:8.2.2'
-    //Dagger hilt
-    implementation 'com.google.dagger:hilt-android:2.50'
-    kapt 'com.google.dagger:hilt-compiler:2.50'
 
     def room_version = "2.6.1"
 
@@ -91,11 +84,11 @@ dependencies {
 
 
     implementation 'com.squareup.picasso:picasso:2.71828'
-    // For local unit tests
-    testImplementation 'com.google.dagger:hilt-android-testing:2.50'
-    testAnnotationProcessor 'com.google.dagger:hilt-compiler:2.50'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 kapt {

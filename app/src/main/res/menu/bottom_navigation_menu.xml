@@ -3,18 +3,18 @@
     <item
         android:id="@+id/profile"
         android:icon="@drawable/baseline_account_circle_24"
-        android:title="profile" />
+        android:title="@string/profile" />
     <item
         android:id="@+id/addPost"
         android:icon="@drawable/baseline_post_add_24"
-        android:title="addPost" />
+        android:title="@string/addpost" />
     <item
         android:id="@+id/allPosts"
         android:icon="@drawable/baseline_post_add_24"
-        android:title="allPosts" />
+        android:title="@string/allposts" />
     <item
-        android:id="@+id/news"
+        android:id="@+id/deals"
         android:icon="@drawable/baseline_post_add_24"
-        android:title="news" />
+        android:title="@string/deals" />
 </menu>
 
