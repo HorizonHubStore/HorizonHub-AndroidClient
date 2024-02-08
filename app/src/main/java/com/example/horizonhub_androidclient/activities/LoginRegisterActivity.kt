@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.data.user.UserViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class LoginRegisterActivity : AppCompatActivity() {
     private lateinit var mUserViewModel: UserViewModel
 
