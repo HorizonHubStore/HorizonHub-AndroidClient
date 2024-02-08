@@ -30,4 +30,7 @@ class GamePostViewModel(application: Application) : AndroidViewModel(application
     suspend fun updateGamePostImage(gamePostId: String, newProfileImage: String) {
         repository.updateGamePostImage(gamePostId, newProfileImage)
     }
+    fun getPostsByUser(userId: String): LiveData<List<GamePost>> {
+        return repository.getPostsByUser(userId)
+    }
 }
