@@ -1,4 +1,3 @@
-// ProfileFragment.kt
 package com.example.horizonhub_androidclient.fragments
 
 import android.annotation.SuppressLint

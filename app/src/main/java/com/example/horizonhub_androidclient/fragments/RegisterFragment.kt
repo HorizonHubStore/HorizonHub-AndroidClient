@@ -1,4 +1,3 @@
-// RegisterFragment.kt
 package com.example.horizonhub_androidclient.fragments
 
 import android.os.Bundle
