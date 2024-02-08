@@ -11,20 +11,27 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewGamePosts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
-        <ProgressBar
-            android:id="@+id/refreshProgressBar"
-            style="?android:attr/progressBarStyleLarge"
+        <CheckBox
+            android:id="@+id/checkboxFilterMyPosts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
-            android:visibility="gone"
-            />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="666dp" />
 
-
-
+        <TextView
+            android:id="@+id/textFilterMyPosts"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="637dp"
+            android:layout_toStartOf="@+id/checkboxFilterMyPosts"
+            android:text="My Posts"
+            android:textSize="16sp" />
 
 
     </RelativeLayout>

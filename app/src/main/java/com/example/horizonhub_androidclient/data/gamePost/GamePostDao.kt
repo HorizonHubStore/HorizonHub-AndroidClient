@@ -22,4 +22,7 @@ interface GamePostDao {
 
     @Query("UPDATE game_post_table SET gameImage = :newGamePostImage WHERE id = :gamePostId")
     suspend fun updateGamePostImage(gamePostId: String, newGamePostImage: String)
+
+    @Query("SELECT * FROM game_post_table WHERE creator = :userId")
+    fun getPostsByUser(userId: String): LiveData<List<GamePost>>
 }

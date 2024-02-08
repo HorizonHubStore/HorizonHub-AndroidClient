@@ -15,6 +15,7 @@ import com.example.horizonhub_androidclient.data.gamePost.GamePost
 import com.example.horizonhub_androidclient.data.gamePost.GamePostViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentAllPostsBinding
 import com.example.horizonhub_androidclient.model.PostModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,6 +31,8 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
     private lateinit var gamePostAdapter: GamePostAdapter
     private lateinit var gamePostViewModel: GamePostViewModel
     private lateinit var database: DatabaseReference
+    private var showMyPostsOnly = false
+
 
 
     override fun onCreateView(
@@ -40,9 +43,20 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         binding = FragmentAllPostsBinding.inflate(inflater, container, false)
         gamePostViewModel = ViewModelProvider(this).get(GamePostViewModel::class.java)
         database = FirebaseDatabase.getInstance().getReference("gamePosts")
-
         binding.swipeRefreshLayout.setOnRefreshListener {
             fetchPostsFromFirebase()
+        }
+
+        binding.checkboxFilterMyPosts.setOnCheckedChangeListener { _, isChecked ->
+            showMyPostsOnly = isChecked
+            gamePostViewModel.allPosts.value?.let { gamePosts ->
+                if (showMyPostsOnly) {
+                    val currentUserPosts = gamePosts.filter { post -> post.creator == FirebaseAuth.getInstance().currentUser?.uid }
+                    gamePostAdapter.updateData(currentUserPosts)
+                } else {
+                    gamePostAdapter.updateData(gamePosts)
+                }
+            }
         }
 
         return binding.root
@@ -57,7 +71,14 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         recyclerView.adapter = gamePostAdapter
 
         gamePostViewModel.allPosts.observe(viewLifecycleOwner) { gamePosts ->
-            gamePostAdapter.updateData(gamePosts)
+            gamePosts?.let {
+                if (showMyPostsOnly) {
+                    val currentUserPosts = it.filter { post -> post.creator == FirebaseAuth.getInstance().currentUser?.uid }
+                    gamePostAdapter.updateData(currentUserPosts)
+                } else {
+                    gamePostAdapter.updateData(it)
+                }
+            }
         }
     }
 
