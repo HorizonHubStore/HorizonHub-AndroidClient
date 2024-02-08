@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1064901372158",
+    "firebase_url": "https://horizon-hubs-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "horizon-hubs",
     "storage_bucket": "horizon-hubs.appspot.com"
   },
