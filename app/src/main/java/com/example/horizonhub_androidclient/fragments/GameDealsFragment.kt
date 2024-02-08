@@ -115,10 +115,8 @@ class GameDealsFragment : Fragment(R.layout.fragment_game_deals) {
         override fun getItemCount(): Int = games.size
 
         fun submitList(newList: List<GameDeal>) {
-            val oldSize = games.size
             games = newList
-            val newSize = games.size
-            notifyItemRangeInserted(oldSize, newSize - oldSize)
+            notifyDataSetChanged()
         }
 
         inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
