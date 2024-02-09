@@ -59,7 +59,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = FirebaseAuth.getInstance()
 
+        mUserViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
 
         auth.currentUser?.let {
             mUserViewModel.getUserById(it.uid).observe(viewLifecycleOwner) { user ->
@@ -75,8 +77,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
             }
         }
-        mUserViewModel = ViewModelProvider(requireActivity()).get(UserViewModel::class.java)
-        auth = FirebaseAuth.getInstance()
 
 
 
