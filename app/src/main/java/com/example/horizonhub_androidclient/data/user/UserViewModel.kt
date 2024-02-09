@@ -13,7 +13,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     val allUsers: LiveData<List<User>>
 
-    // Add LiveData for AuthStateEntity
     val dbAuthState: LiveData<AuthState?>
 
     init {
@@ -34,12 +33,17 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     fun getUserById(userEmail: String): LiveData<User?> {
         return repository.getUserById(userEmail)
     }
-    suspend fun updateProfileImage(userId: String, newProfileImage: String) {
+    suspend fun updateProfileImage(userId: String, newProfileImage: ByteArray) {
         repository.updateProfileImage(userId, newProfileImage)
     }
 
     suspend fun updateAuthState(authStateEntity: AuthState) {
         repository.updateAuthState(authStateEntity)
+    }
+    fun updateUserProfile(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateUser(user)
+        }
     }
 
     fun getAuthState(): LiveData<AuthState?> {
