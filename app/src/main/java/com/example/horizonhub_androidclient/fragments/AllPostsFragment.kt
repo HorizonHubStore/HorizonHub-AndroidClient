@@ -100,7 +100,7 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
                         price = postModelMap["price"] as Long
                     )
 
-                    postModel?.let {
+                    postModel.let {
                         gamePostViewModel.viewModelScope.launch {
                             val byteArray = downloadImageAsByteArray(it.gameImage)
                             if (byteArray != null) {
@@ -130,7 +130,6 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle database error
                 binding.swipeRefreshLayout.isRefreshing = false
             }
         })

@@ -42,7 +42,6 @@ class GameDealsFragment : Fragment(R.layout.fragment_game_deals) {
         gameListAdapter = GameListAdapter()
         recyclerViewGames.adapter = gameListAdapter
 
-        // Initialize Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://www.cheapshark.com/api/1.0/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -77,12 +76,10 @@ class GameDealsFragment : Fragment(R.layout.fragment_game_deals) {
                         gameListAdapter.submitList(it)
                     }
                 } else {
-                    // Handle API error
                 }
             }
 
             override fun onFailure(call: Call<List<GameDeal>>, t: Throwable) {
-                // Handle network error
             }
         })
     }
@@ -107,8 +104,8 @@ class GameDealsFragment : Fragment(R.layout.fragment_game_deals) {
 
             Glide.with(requireContext())
                 .load(game.thumb)
-                .placeholder(R.drawable.game_no_image) // Placeholder image while loading
-                .error(R.drawable.error_image) // Error image if loading fails
+                .placeholder(R.drawable.game_no_image)
+                .error(R.drawable.error_image)
                 .into(holder.imageViewGameThumbnail)
         }
 
