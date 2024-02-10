@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.io.IOException
 
 class GamePostFragment : Fragment(R.layout.fragment_game_post) {
     private lateinit var binding: FragmentGamePostBinding
@@ -111,6 +112,26 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
 
 
     private fun uploadImageToFirebaseStorage(callback: (Uri?) -> Unit) {
+        if (selectedImageUri == null) {
+        Toast.makeText(requireContext(), "Please select an image", Toast.LENGTH_SHORT).show()
+        callback(null)
+        return
+    }
+        try {
+            val inputStream = requireContext().contentResolver.openInputStream(selectedImageUri!!)
+            val fileSize = inputStream?.available() ?: 0
+            inputStream?.close()
+
+            if (fileSize > 2 * 1024 * 1024) { // Check if size exceeds 2MB
+                Toast.makeText(requireContext(), "Image size exceeds 2MB. Please choose a smaller image.", Toast.LENGTH_SHORT).show()
+                callback(null)
+                return
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            callback(null)
+            return
+        }
         val imageName = "game_image_${System.currentTimeMillis()}.jpg"
         val imageRef = storageReference.child("games_images").child(imageName)
 
