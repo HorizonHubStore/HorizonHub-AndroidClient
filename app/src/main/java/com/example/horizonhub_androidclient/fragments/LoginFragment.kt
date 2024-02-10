@@ -103,6 +103,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
                 } else {
                     Log.w("LoginFragment", "User login failed: ${task.exception?.message}")
+                    binding.progressBarLogin.visibility = View.GONE
+
                     Toast.makeText(
                         requireContext(),
                         "login failed. ${task.exception?.message}",
@@ -118,35 +120,40 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
                     val userId = postSnapshot.key
-
                     val userModelMap = postSnapshot.value as Map<String, Any>
                     val userProfile = userModelMap["profileImage"] as String
+                    val lastUpdated = userModelMap["lastUpdate"] as Long
+                    if (userId != null) {
+                        mUserViewModel.getUserById(userId)
+                            .observe(viewLifecycleOwner) { cUser ->
+                                if (cUser == null || lastUpdated != cUser.lastUpdate) {
+                                    userModelMap.let {
+                                        mUserViewModel.viewModelScope.launch {
+                                            val byteArray = if (userProfile.isEmpty()){
+                                                drawableToByteArray(requireContext(),R.drawable.default_user_profile)
+                                            }else{
+                                                downloadImageAsByteArray(userModelMap["profileImage"] as String)
+                                            }
+                                            val user = userId.let { it1 ->
+                                                User(
+                                                    it1,userModelMap["email"] as String,userModelMap["fullName"] as String,
+                                                    byteArray,userModelMap["lastUpdate"] as Long)
+                                            }
+                                            if (cUser == null) {
+                                                mUserViewModel.addUserToLocalDatabase(user)
+                                            }else{
+                                                mUserViewModel.updateUserProfile(user)
 
-                    userModelMap.let {
-                        mUserViewModel.viewModelScope.launch {
-                            val byteArray = if (userProfile.isEmpty()){
-                                drawableToByteArray(requireContext(),R.drawable.default_user_profile)
-                            }else{
-                                downloadImageAsByteArray(userModelMap["profileImage"] as String)
-                            }
-                            val user = userId?.let { it1 ->
-                                User(
-                                    it1,userModelMap["email"] as String,userModelMap["fullName"] as String,
-                                    byteArray,userModelMap["lastUpdate"] as Long)
-                            }
-
-                            if (userId != null) {
-                                mUserViewModel.getUserById(userId)
-                                    .observe(viewLifecycleOwner) { cUser ->
-                                        if (cUser == null && user != null) {
-                                            mUserViewModel.addUserToLocalDatabase(user)
-                                        }else if (user?.lastUpdate!! != cUser?.lastUpdate!!){
-                                            mUserViewModel.updateUserProfile(user)
+                                            }
                                         }
                                     }
+                                }
                             }
-                        }
                     }
+
+
+
+
                 }
             }
 

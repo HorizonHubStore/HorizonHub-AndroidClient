@@ -86,9 +86,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             val authState = AuthState(1,false,"")
             lifecycleScope.launch {
                 mUserViewModel.updateAuthState(authState)
+                val intent = Intent(requireActivity(), LoginRegisterActivity::class.java)
+                startActivity(intent)
             }
-            val intent = Intent(requireActivity(), LoginRegisterActivity::class.java)
-            startActivity(intent)
+
+
         }
     }
 
