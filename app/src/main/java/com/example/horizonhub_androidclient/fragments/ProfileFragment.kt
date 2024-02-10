@@ -1,6 +1,5 @@
 package com.example.horizonhub_androidclient.fragments
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory

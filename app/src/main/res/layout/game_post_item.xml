@@ -41,4 +41,14 @@
         android:layout_marginBottom="8dp"
         android:textAppearance="?android:textAppearanceMedium" />
 
+    <Button
+        android:id="@+id/btnEditPost"
+        style="@style/blueButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:backgroundTint="@null"
+        android:layout_marginBottom="8dp"
+        android:textAppearance="?android:textAppearanceMedium" />
+
 </LinearLayout>

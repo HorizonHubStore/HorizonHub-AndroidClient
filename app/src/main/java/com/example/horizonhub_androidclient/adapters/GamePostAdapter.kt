@@ -3,12 +3,13 @@ import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.data.gamePost.GamePost
-import com.squareup.picasso.Picasso
+import com.google.firebase.auth.FirebaseAuth.getInstance
 
 class GamePostAdapter(private var gamePosts: List<GamePost>) : RecyclerView.Adapter<GamePostAdapter.GamePostViewHolder>() {
 
@@ -18,6 +19,15 @@ class GamePostAdapter(private var gamePosts: List<GamePost>) : RecyclerView.Adap
         val textViewDescription: TextView = itemView.findViewById(R.id.textViewDescription)
         val textViewPrice: TextView = itemView.findViewById(R.id.textViewPrice)
         val imageViewGameImage: ImageView = itemView.findViewById(R.id.imageViewGameImage)
+        private val btnEditPost: Button = itemView.findViewById(R.id.btnEditPost)
+
+        fun bind(post: GamePost) {
+            val currentUserUid = getInstance().currentUser?.uid
+            val isVisible = post.creator == currentUserUid
+            btnEditPost.visibility = if (isVisible) View.VISIBLE else View.GONE
+            btnEditPost.setOnClickListener {
+            }
+        }
     }
 
     fun updateData(newGamePosts: List<GamePost>) {
@@ -36,10 +46,15 @@ class GamePostAdapter(private var gamePosts: List<GamePost>) : RecyclerView.Adap
         holder.textViewGameName.text = "Game Name: ${currentItem.gameName}"
         holder.textViewDescription.text = "Description: ${currentItem.description}"
         holder.textViewPrice.text = "Price: ${currentItem.price}"
-        holder.imageViewGameImage.setImageBitmap(currentItem.gameImage?.let { BitmapFactory.decodeByteArray(currentItem.gameImage, 0, it.size) })
+        holder.imageViewGameImage.setImageBitmap(currentItem.gameImage?.let {
+            BitmapFactory.decodeByteArray(
+                currentItem.gameImage,
+                0,
+                it.size
+            )
+        })
+        holder.bind(currentItem)
     }
 
     override fun getItemCount() = gamePosts.size
 }
-
-
