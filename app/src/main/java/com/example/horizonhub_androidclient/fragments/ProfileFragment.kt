@@ -1,6 +1,5 @@
 package com.example.horizonhub_androidclient.fragments
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -9,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -107,6 +107,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private fun uploadImageToFirebase(imageUri: Uri) {
         val storage = FirebaseStorage.getInstance()
         val storageReference = storage.reference
+
+        try {
+            val inputStream = requireContext().contentResolver.openInputStream(imageUri)
+            val fileSize = inputStream?.available() ?: 0
+            inputStream?.close()
+
+            if (fileSize > 2 * 1024 * 1024) { // Check if size exceeds 2MB
+                // Show toast and return, indicating that upload is not allowed
+                Toast.makeText(requireContext(), "Image size exceeds 2MB. Please choose a smaller image.", Toast.LENGTH_SHORT).show()
+                return
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+            // Handle any errors that occur during file size checking
+            return
+        }
 
         val timestamp = System.currentTimeMillis()
         val imageName = "profile_image_$timestamp.jpg"
