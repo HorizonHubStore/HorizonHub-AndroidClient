@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.horizonhub_androidclient.R
-import com.example.horizonhub_androidclient.data.gamePost.GamePost
 import com.example.horizonhub_androidclient.data.gamePost.GamePostViewModel
 import com.example.horizonhub_androidclient.databinding.FragmentGamePostBinding
 import com.example.horizonhub_androidclient.model.PostModel
@@ -122,8 +121,12 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
             val fileSize = inputStream?.available() ?: 0
             inputStream?.close()
 
-            if (fileSize > 2 * 1024 * 1024) { // Check if size exceeds 2MB
-                Toast.makeText(requireContext(), "Image size exceeds 2MB. Please choose a smaller image.", Toast.LENGTH_SHORT).show()
+            if (fileSize > 2 * 1024 * 1024) {
+                Toast.makeText(
+                    requireContext(),
+                    "Image size exceeds 2MB. Please choose a smaller image.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 callback(null)
                 return
             }

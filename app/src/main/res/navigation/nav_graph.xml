@@ -21,9 +21,9 @@
         android:label="allPostsFragment"
         tools:layout="@layout/fragment_all_posts" />
     <fragment
-        android:id="@+id/CompareGamePricesFragment"
+        android:id="@+id/CompareGameDealsFragment"
         android:name="com.example.horizonhub_androidclient.fragments.GameDealsFragment"
-        android:label="compareGamePricesFragment"
+        android:label="compareGameDealsFragment"
         tools:layout="@layout/fragment_game_deals" />
 
 </navigation>
