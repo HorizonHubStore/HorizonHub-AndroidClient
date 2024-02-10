@@ -71,7 +71,7 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         recyclerView = binding.recyclerViewGamePosts
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
-        gamePostAdapter = GamePostAdapter(emptyList())
+        gamePostAdapter = GamePostAdapter(emptyList(), childFragmentManager, R.id.fragment_container)
         recyclerView.adapter = gamePostAdapter
 
         gamePostViewModel.allPosts.observe(viewLifecycleOwner) { gamePosts ->

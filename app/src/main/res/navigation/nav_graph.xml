@@ -25,5 +25,10 @@
         android:name="com.example.horizonhub_androidclient.fragments.GameDealsFragment"
         android:label="compareGamePricesFragment"
         tools:layout="@layout/fragment_game_deals" />
+    <fragment
+        android:id="@+id/EditPostFragment"
+        android:name="com.example.horizonhub_androidclient.fragments.EditPostFragment"
+        android:label="editPostFragment"
+        tools:layout="@layout/fragment_edit_post" />
 
 </navigation>
