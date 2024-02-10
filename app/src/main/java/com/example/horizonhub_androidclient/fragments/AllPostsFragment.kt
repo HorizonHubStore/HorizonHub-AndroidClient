@@ -1,11 +1,13 @@
 package com.example.horizonhub_androidclient.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,8 +38,6 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
     private lateinit var gamePostViewModel: GamePostViewModel
     private lateinit var database: DatabaseReference
     private var showMyPostsOnly = false
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,7 +71,10 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         recyclerView = binding.recyclerViewGamePosts
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
-        gamePostAdapter = GamePostAdapter(emptyList())
+        gamePostAdapter = GamePostAdapter(emptyList()) { gamePost ->
+            database.child(gamePost.id).removeValue()
+
+        }
         recyclerView.adapter = gamePostAdapter
 
         gamePostViewModel.allPosts.observe(viewLifecycleOwner) { gamePosts ->
@@ -87,10 +90,13 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
     }
 
     private fun fetchPostsFromFirebase() {
+        val fetchedPostIds = mutableListOf<String>()
+
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
                     val postId = postSnapshot.key!!
+                    fetchedPostIds.add(postId)
                     val postModelMap = postSnapshot.value as Map<*, *>
                     gamePostViewModel.getGamePostById(postId)
                         .observe(viewLifecycleOwner) { post ->
@@ -116,8 +122,20 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
                                                 price = postModel.price
                                             )
                                         gamePostViewModel.addGamePostToLocalDatabase(gamePost)
-                                    } } } }
+                                    }
+                                }
+                            }
+                        }
 
+                }
+                gamePostViewModel.allPosts.value?.let { localPosts ->
+                    val deletedPosts = localPosts.filter { localPost -> localPost.id !in fetchedPostIds }
+                    deletedPosts.forEach { deletedPost ->
+                        lifecycleScope.launch {
+                            gamePostViewModel.deleteGamePostFromLocalDatabase(deletedPost.id)
+                        }
+                        gamePostAdapter.removeGamePost(deletedPost)
+                    }
                 }
                 binding.swipeRefreshLayout.isRefreshing = false
             }
@@ -127,6 +145,7 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
             }
         })
     }
+
 
     private suspend fun downloadImageAsByteArray(imageUrl: String): ByteArray? {
         return try {

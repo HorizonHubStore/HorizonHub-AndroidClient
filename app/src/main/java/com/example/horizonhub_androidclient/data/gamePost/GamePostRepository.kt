@@ -12,6 +12,10 @@ class GamePostRepository(private val gamePostDao: GamePostDao) {
         return gamePostDao.getAllGamesPosts()
     }
 
+    suspend fun deleteGamePostFromLocalDatabase(gamePostId: String) {
+        gamePostDao.deleteGamePost(gamePostId)
+    }
+
     fun getGamePostById(gamePostId: String): LiveData<GamePost?> {
         return gamePostDao.getGamePostById(gamePostId)
     }

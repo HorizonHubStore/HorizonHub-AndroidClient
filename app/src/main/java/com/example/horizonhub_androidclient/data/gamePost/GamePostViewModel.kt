@@ -27,6 +27,10 @@ class GamePostViewModel(application: Application) : AndroidViewModel(application
     fun getGamePostById(gamePostId: String): LiveData<GamePost?> {
         return repository.getGamePostById(gamePostId)
     }
+
+    suspend fun deleteGamePostFromLocalDatabase(gamePostId: String) {
+        repository.deleteGamePostFromLocalDatabase(gamePostId)
+    }
     suspend fun updateGamePostImage(gamePostId: String, newProfileImage: String) {
         repository.updateGamePostImage(gamePostId, newProfileImage)
     }
