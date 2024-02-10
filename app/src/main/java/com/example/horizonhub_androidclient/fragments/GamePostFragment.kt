@@ -53,6 +53,7 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
         }
 
         binding.buttonAddPost.setOnClickListener {
+            loadState(false)
             val gameName = binding.editTextGameName.text.toString()
             val description = binding.editTextDescription.text.toString()
             val recommendedPrice = binding.editTextPrice.text.toString()
@@ -60,7 +61,6 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
 
             if (gameName.isNotEmpty() && description.isNotEmpty() && recommendedPrice.isNotEmpty() && selectedImageUri != null) {
                 uploadImageToFirebaseStorage { downloadUri ->
-                    // Create a new GamePost object
                     val gamePost = PostModel(
                         creator = uid,
                         gameName = gameName,
@@ -72,26 +72,40 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
                     firebaseRef.push().setValue(gamePost)
                         .addOnSuccessListener {
                             resetAllFields()
+                            loadState(true)
                         }
                         .addOnFailureListener { e ->
+                            loadState(true)
                             Log.e("GamePostFragment", "Error adding game post to Firebase: ${e.message}")
-                            // Show error toast or handle failure accordingly
                         }
                 }
             } else {
+                loadState(true)
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()            }
         }
 
+
+
+
+    }
+    private fun loadState(done:Boolean){
+        binding.buttonAddPost.isEnabled = done
+        binding.buttonUploadPicture.isEnabled = done
+        if (done){
+            binding.progressBar.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.VISIBLE
+
+        }
     }
 
     private fun resetAllFields() {
         binding.editTextGameName.setText("")
         binding.editTextDescription.setText("")
         binding.editTextPrice.setText("")
-        binding.imageViewPickedImage.setImageResource(0) // Clear image
-        selectedImageUri = null // Clear selected image URI
+        binding.imageViewPickedImage.setImageResource(0)
+        selectedImageUri = null
 
-        // Show success toast
         Toast.makeText(requireContext(), "Post uploaded successfully", Toast.LENGTH_SHORT).show()
     }
 
@@ -131,7 +145,6 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
             data?.data?.let {
                 selectedImageUri = it
-                // Set the selected image to the ImageView
                 binding.imageViewPickedImage.setImageURI(selectedImageUri)
             }
         }

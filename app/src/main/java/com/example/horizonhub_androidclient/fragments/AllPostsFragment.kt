@@ -90,47 +90,39 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
-                    val postId = postSnapshot.key
-                    val postModelMap = postSnapshot.value as Map<String, Any>
-                    val postModel = PostModel(
-                        creator = postModelMap["creator"] as String,
-                        gameName = postModelMap["gameName"] as String,
-                        gameImage = postModelMap["gameImage"] as String,
-                        description = postModelMap["description"] as String,
-                        price = postModelMap["price"] as Long
-                    )
+                    val postId = postSnapshot.key!!
+                    val postModelMap = postSnapshot.value as Map<*, *>
+                    gamePostViewModel.getGamePostById(postId)
+                        .observe(viewLifecycleOwner) { post ->
+                            if (post == null) {
+                                val postModel = PostModel(
+                                    creator = postModelMap["creator"] as String,
+                                    gameName = postModelMap["gameName"] as String,
+                                    gameImage = postModelMap["gameImage"] as String,
+                                    description = postModelMap["description"] as String,
+                                    price = postModelMap["price"] as Long
+                                )
 
-                    postModel?.let {
-                        gamePostViewModel.viewModelScope.launch {
-                            val byteArray = downloadImageAsByteArray(it.gameImage)
-                            if (byteArray != null) {
-                                val gamePost = postId?.let { it1 ->
-                                    GamePost(
-                                        id = it1,
-                                        creator = it.creator,
-                                        gameName = it.gameName,
-                                        gameImage = byteArray,
-                                        description = it.description,
-                                        price = it.price
-                                    )
-                                }
-                                if (postId != null) {
-                                    gamePostViewModel.getGamePostById(postId)
-                                        .observe(viewLifecycleOwner) { post ->
-                                            if (post == null && gamePost != null) {
-                                                gamePostViewModel.addGamePostToLocalDatabase(gamePost)
-                                            }
-                                        }
-                                }
-                            }
-                        }
-                    }
+                                gamePostViewModel.viewModelScope.launch {
+                                    val byteArray = downloadImageAsByteArray(postModel.gameImage)
+                                    if (byteArray != null) {
+                                        val gamePost =
+                                            GamePost(
+                                                id = postId,
+                                                creator = postModel.creator,
+                                                gameName = postModel.gameName,
+                                                gameImage = byteArray,
+                                                description = postModel.description,
+                                                price = postModel.price
+                                            )
+                                        gamePostViewModel.addGamePostToLocalDatabase(gamePost)
+                                    } } } }
+
                 }
                 binding.swipeRefreshLayout.isRefreshing = false
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle database error
                 binding.swipeRefreshLayout.isRefreshing = false
             }
         })

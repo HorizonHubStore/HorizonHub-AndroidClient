@@ -17,8 +17,12 @@ class UserRepository(private val userDao: UserDao,private val authStateDao: Auth
     fun getUserById(userEmail: String): LiveData<User?> {
         return userDao.getUserById(userEmail)
     }
+    suspend fun updateUser(user: User) {
+        userDao.updateUser(user)
+    }
 
-    suspend fun updateProfileImage(userId: String, newProfileImage: String) {
+
+    suspend fun updateProfileImage(userId: String, newProfileImage: ByteArray) {
         userDao.updateProfileImage(userId, newProfileImage)
     }
 

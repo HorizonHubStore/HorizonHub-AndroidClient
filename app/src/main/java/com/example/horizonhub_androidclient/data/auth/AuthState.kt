@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "auth_state")
 data class AuthState(
     @PrimaryKey
-    val id: Int = 1, // This table will have only one row
+    val id: Int = 1,
     val isLoggedIn: Boolean,
     val userId: String?
 )
