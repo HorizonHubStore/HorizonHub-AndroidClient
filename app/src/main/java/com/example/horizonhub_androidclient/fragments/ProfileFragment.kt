@@ -130,6 +130,24 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     }?.addOnFailureListener { e ->
                         println("Error updating user image: ${e.message}")
                     }
+                    var image = ByteArray(0)
+                    mUserViewModel.viewModelScope.launch {
+                        image = downloadImageAsByteArray(downloadUri.toString())
+
+                    }
+                    auth.currentUser?.let {
+                        mUserViewModel.getUserById(it.uid)
+                            .observe(viewLifecycleOwner) { cUser ->
+                                val updatedUser = cUser?.let { it1 ->
+                                    User(
+                                        it1.id,cUser.email,cUser.fullName,
+                                        image,updateMap["lastUpdate"] as Long)
+                                }
+                                if (updatedUser != null) {
+                                    mUserViewModel.updateUserProfile(updatedUser)
+                                }
+                            }
+                    }
 
 
                 }

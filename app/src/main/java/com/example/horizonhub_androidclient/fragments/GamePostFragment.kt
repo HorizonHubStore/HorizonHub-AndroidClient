@@ -53,6 +53,7 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
         }
 
         binding.buttonAddPost.setOnClickListener {
+            loadState(false)
             val gameName = binding.editTextGameName.text.toString()
             val description = binding.editTextDescription.text.toString()
             val recommendedPrice = binding.editTextPrice.text.toString()
@@ -71,15 +72,31 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
                     firebaseRef.push().setValue(gamePost)
                         .addOnSuccessListener {
                             resetAllFields()
+                            loadState(true)
                         }
                         .addOnFailureListener { e ->
+                            loadState(true)
                             Log.e("GamePostFragment", "Error adding game post to Firebase: ${e.message}")
                         }
                 }
             } else {
+                loadState(true)
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()            }
         }
 
+
+
+
+    }
+    private fun loadState(done:Boolean){
+        binding.buttonAddPost.isEnabled = done
+        binding.buttonUploadPicture.isEnabled = done
+        if (done){
+            binding.progressBar.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.VISIBLE
+
+        }
     }
 
     private fun resetAllFields() {

@@ -118,6 +118,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
                     val userId = postSnapshot.key
+
                     val userModelMap = postSnapshot.value as Map<String, Any>
                     val userProfile = userModelMap["profileImage"] as String
 

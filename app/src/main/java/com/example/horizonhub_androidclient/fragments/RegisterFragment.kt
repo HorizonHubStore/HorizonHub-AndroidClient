@@ -74,10 +74,10 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     val user = UserModel(uid, email, fullName,"", System.currentTimeMillis())
                     firebaseRef.child(uid).setValue(user)
                         .addOnSuccessListener {
-                            Log.e("GamePostFragment", "Successfully registered")
+                            Log.e("RegisterFragment", "Successfully registered")
                         }
                         .addOnFailureListener { e ->
-                            Log.e("GamePostFragment", "Error adding game post to Firebase: ${e.message}")
+                            Log.e("RegisterFragment", "Error adding game post to Firebase: ${e.message}")
                         }
                     findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
                 } else {
