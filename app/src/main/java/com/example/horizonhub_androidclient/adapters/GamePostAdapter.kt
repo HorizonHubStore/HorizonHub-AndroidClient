@@ -1,23 +1,19 @@
 package com.example.horizonhub_androidclient.adapters
 import android.graphics.BitmapFactory
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.data.gamePost.GamePost
-import com.example.horizonhub_androidclient.fragments.EditPostFragment
 import com.google.firebase.auth.FirebaseAuth.getInstance
+import androidx.navigation.findNavController
 
 class GamePostAdapter(
-    private var gamePosts: List<GamePost>,
-    private val fragmentManager: FragmentManager,
-    private val fragmentContainerView: Int
+    private var gamePosts: List<GamePost>
 ) : RecyclerView.Adapter<GamePostAdapter.GamePostViewHolder>() {
     inner class GamePostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewCreator: TextView = itemView.findViewById(R.id.textViewCreator)
@@ -32,11 +28,6 @@ class GamePostAdapter(
             val isVisible = gamePost.creator == currentUserUid
             btnEditPost.visibility = if (isVisible) View.VISIBLE else View.GONE
             btnEditPost.setOnClickListener {
-                val editPostFragment = EditPostFragment()
-                val bundle = Bundle()
-                bundle.putParcelable("gamePost", gamePost)
-                editPostFragment.arguments = bundle
-                fragmentManager.beginTransaction().replace(fragmentContainerView, editPostFragment).addToBackStack(null).commit()
             }
         }
     }

@@ -19,7 +19,11 @@
         android:id="@+id/allPostsFragment"
         android:name="com.example.horizonhub_androidclient.fragments.AllPostsFragment"
         android:label="allPostsFragment"
-        tools:layout="@layout/fragment_all_posts" />
+        tools:layout="@layout/fragment_all_posts" >
+        <action
+            android:id="@+id/action_allPostsFragment_to_EditPostFragment"
+            app:destination="@id/EditPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/CompareGamePricesFragment"
         android:name="com.example.horizonhub_androidclient.fragments.GameDealsFragment"
