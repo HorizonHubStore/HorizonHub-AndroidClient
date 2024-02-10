@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "1064901372158",
-    "firebase_url": "https://horizon-hubs-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "horizon-hubs",
-    "storage_bucket": "horizon-hubs.appspot.com"
+    "project_number": "991451213292",
+    "firebase_url": "https://horizonhub-ff0c9-default-rtdb.firebaseio.com",
+    "project_id": "horizonhub-ff0c9",
+    "storage_bucket": "horizonhub-ff0c9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1064901372158:android:9ce63ae2366113bb3f1daf",
+        "mobilesdk_app_id": "1:991451213292:android:f172c014aead7f404964c9",
         "android_client_info": {
           "package_name": "com.example.horizonhub_androidclient"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDlUus0_DBAbMw3t9BK6oI_FkHF7LLkHbo"
+          "current_key": "AIzaSyCECMWnxBOxTHgrY0AEQDBLq0uQhlOZv28"
         }
       ],
       "services": {
