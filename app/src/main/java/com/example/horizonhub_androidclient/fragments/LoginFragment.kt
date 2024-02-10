@@ -120,31 +120,29 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
                     val userId = postSnapshot.key
-                    val userModelMap = postSnapshot.value as Map<String, Any>
+                    val userModelMap = postSnapshot.value as Map<*, *>
                     val userProfile = userModelMap["profileImage"] as String
                     val lastUpdated = userModelMap["lastUpdate"] as Long
                     if (userId != null) {
                         mUserViewModel.getUserById(userId)
                             .observe(viewLifecycleOwner) { cUser ->
                                 if (cUser == null || lastUpdated != cUser.lastUpdate) {
-                                    userModelMap.let {
-                                        mUserViewModel.viewModelScope.launch {
-                                            val byteArray = if (userProfile.isEmpty()){
-                                                drawableToByteArray(requireContext(),R.drawable.default_user_profile)
-                                            }else{
-                                                downloadImageAsByteArray(userModelMap["profileImage"] as String)
-                                            }
-                                            val user = userId.let { it1 ->
-                                                User(
-                                                    it1,userModelMap["email"] as String,userModelMap["fullName"] as String,
-                                                    byteArray,userModelMap["lastUpdate"] as Long)
-                                            }
-                                            if (cUser == null) {
-                                                mUserViewModel.addUserToLocalDatabase(user)
-                                            }else{
-                                                mUserViewModel.updateUserProfile(user)
+                                    mUserViewModel.viewModelScope.launch {
+                                        val byteArray = if (userProfile.isEmpty()){
+                                            drawableToByteArray(requireContext(),R.drawable.default_user_profile)
+                                        }else{
+                                            downloadImageAsByteArray(userModelMap["profileImage"] as String)
+                                        }
+                                        val user =
+                                            User(
+                                                userId,userModelMap["email"] as String,userModelMap["fullName"] as String,
+                                                byteArray,userModelMap["lastUpdate"] as Long)
 
-                                            }
+                                        if (cUser == null) {
+                                            mUserViewModel.addUserToLocalDatabase(user)
+                                        }else{
+                                            mUserViewModel.updateUserProfile(user)
+
                                         }
                                     }
                                 }
@@ -182,7 +180,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
 
-    private suspend fun drawableToByteArray(context: Context, drawableId: Int): ByteArray {
+    private fun drawableToByteArray(context: Context, drawableId: Int): ByteArray {
         val inputStream = context.resources.openRawResource(drawableId)
         val bitmap = BitmapFactory.decodeStream(inputStream)
         val outputStream = ByteArrayOutputStream()
