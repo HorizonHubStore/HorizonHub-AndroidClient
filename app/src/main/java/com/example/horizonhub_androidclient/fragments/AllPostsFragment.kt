@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,8 +38,6 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
     private lateinit var database: DatabaseReference
     private var showMyPostsOnly = false
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,7 +49,11 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         binding.swipeRefreshLayout.setOnRefreshListener {
             fetchPostsFromFirebase()
         }
-
+        try {
+            fetchPostsFromFirebase()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         binding.checkboxFilterMyPosts.setOnCheckedChangeListener { _, isChecked ->
             showMyPostsOnly = isChecked
             gamePostViewModel.allPosts.value?.let { gamePosts ->
@@ -71,9 +74,13 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         recyclerView = binding.recyclerViewGamePosts
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
-        gamePostAdapter = GamePostAdapter(emptyList())
-        recyclerView.adapter = gamePostAdapter
+        gamePostAdapter = GamePostAdapter(emptyList()) { gamePost ->
+            database.child(gamePost.id).removeValue()
+            gamePostAdapter.removeGamePost(gamePost)
 
+
+        }
+        recyclerView.adapter = gamePostAdapter
         gamePostViewModel.allPosts.observe(viewLifecycleOwner) { gamePosts ->
             gamePosts?.let {
                 if (showMyPostsOnly) {
@@ -87,38 +94,62 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
     }
 
     private fun fetchPostsFromFirebase() {
+        val fetchedPostIds = mutableListOf<String>()
+
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                val localPosts = gamePostViewModel.allPosts.value ?: emptyList()
+
                 for (postSnapshot in snapshot.children) {
                     val postId = postSnapshot.key!!
-                    val postModelMap = postSnapshot.value as Map<*, *>
-                    gamePostViewModel.getGamePostById(postId)
-                        .observe(viewLifecycleOwner) { post ->
-                            if (post == null) {
-                                val postModel = PostModel(
-                                    creator = postModelMap["creator"] as String,
-                                    gameName = postModelMap["gameName"] as String,
-                                    gameImage = postModelMap["gameImage"] as String,
-                                    description = postModelMap["description"] as String,
-                                    price = postModelMap["price"] as Long
-                                )
+                    fetchedPostIds.add(postId)
 
-                                gamePostViewModel.viewModelScope.launch {
-                                    val byteArray = downloadImageAsByteArray(postModel.gameImage)
-                                    if (byteArray != null) {
-                                        val gamePost =
-                                            GamePost(
-                                                id = postId,
-                                                creator = postModel.creator,
-                                                gameName = postModel.gameName,
-                                                gameImage = byteArray,
-                                                description = postModel.description,
-                                                price = postModel.price
-                                            )
-                                        gamePostViewModel.addGamePostToLocalDatabase(gamePost)
-                                    } } } }
+                    val existingPost = localPosts.find { it.id == postId }
 
+                    if (existingPost == null) {
+                        val postModelMap = postSnapshot.value as Map<*, *>
+                        gamePostViewModel.getGamePostById(postId)
+                            .observe(viewLifecycleOwner) { post ->
+                                if (post == null) {
+                                    val postModel = PostModel(
+                                        creator = postModelMap["creator"] as String,
+                                        gameName = postModelMap["gameName"] as String,
+                                        gameImage = postModelMap["gameImage"] as String,
+                                        description = postModelMap["description"] as String,
+                                        price = postModelMap["price"] as Long
+                                    )
+
+                                    gamePostViewModel.viewModelScope.launch {
+                                        val byteArray = downloadImageAsByteArray(postModel.gameImage)
+                                        if (byteArray != null) {
+                                            val gamePost =
+                                                GamePost(
+                                                    id = postId,
+                                                    creator = postModel.creator,
+                                                    gameName = postModel.gameName,
+                                                    gameImage = byteArray,
+                                                    description = postModel.description,
+                                                    price = postModel.price
+                                                )
+                                            gamePostViewModel.addGamePostToLocalDatabase(gamePost)
+                                        }
+                                    }
+                                }
+                            }
+                    }
                 }
+
+                val deletedPosts = localPosts.filter { localPost -> localPost.id !in fetchedPostIds }
+                deletedPosts.forEach { deletedPost ->
+                    lifecycleScope.launch {
+                        gamePostViewModel.deleteGamePostFromLocalDatabase(deletedPost.id)
+                        gamePostViewModel.allPosts.value?.let { gamePosts ->
+                            gamePostAdapter.updateData(gamePosts)
+                        }
+
+                    }
+                }
+
                 binding.swipeRefreshLayout.isRefreshing = false
             }
 
@@ -127,6 +158,8 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
             }
         })
     }
+
+
 
     private suspend fun downloadImageAsByteArray(imageUrl: String): ByteArray? {
         return try {

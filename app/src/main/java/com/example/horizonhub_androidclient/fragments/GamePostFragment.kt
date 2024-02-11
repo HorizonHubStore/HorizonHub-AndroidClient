@@ -57,12 +57,12 @@ class GamePostFragment : Fragment(R.layout.fragment_game_post) {
             val gameName = binding.editTextGameName.text.toString()
             val description = binding.editTextDescription.text.toString()
             val recommendedPrice = binding.editTextPrice.text.toString()
-            val uid = firebaseUser?.uid ?: ""
+            val creator = firebaseUser?.email ?: ""
 
             if (gameName.isNotEmpty() && description.isNotEmpty() && recommendedPrice.isNotEmpty() && selectedImageUri != null) {
                 uploadImageToFirebaseStorage { downloadUri ->
                     val gamePost = PostModel(
-                        creator = uid,
+                        creator = creator,
                         gameName = gameName,
                         gameImage = downloadUri.toString(),
                         description = description,
