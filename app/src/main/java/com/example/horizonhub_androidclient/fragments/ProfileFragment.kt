@@ -113,14 +113,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             val fileSize = inputStream?.available() ?: 0
             inputStream?.close()
 
-            if (fileSize > 2 * 1024 * 1024) { // Check if size exceeds 2MB
-                // Show toast and return, indicating that upload is not allowed
-                Toast.makeText(requireContext(), "Image size exceeds 2MB. Please choose a smaller image.", Toast.LENGTH_SHORT).show()
+            if (fileSize > 2 * 1024 * 1024) {
+
+                Toast.makeText(
+                    requireContext(),
+                    "Image size exceeds 2MB. Please choose a smaller image.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return
             }
         } catch (e: IOException) {
             e.printStackTrace()
-            // Handle any errors that occur during file size checking
+
             return
         }
 
