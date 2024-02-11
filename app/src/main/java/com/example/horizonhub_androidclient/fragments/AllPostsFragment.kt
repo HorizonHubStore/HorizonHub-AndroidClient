@@ -49,7 +49,11 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         binding.swipeRefreshLayout.setOnRefreshListener {
             fetchPostsFromFirebase()
         }
-
+        try {
+            fetchPostsFromFirebase()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         binding.checkboxFilterMyPosts.setOnCheckedChangeListener { _, isChecked ->
             showMyPostsOnly = isChecked
             gamePostViewModel.allPosts.value?.let { gamePosts ->
@@ -77,7 +81,6 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
 
         }
         recyclerView.adapter = gamePostAdapter
-
         gamePostViewModel.allPosts.observe(viewLifecycleOwner) { gamePosts ->
             gamePosts?.let {
                 if (showMyPostsOnly) {
@@ -136,7 +139,6 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
                     }
                 }
 
-                // Remove posts that are not fetched from Firebase
                 val deletedPosts = localPosts.filter { localPost -> localPost.id !in fetchedPostIds }
                 deletedPosts.forEach { deletedPost ->
                     lifecycleScope.launch {
