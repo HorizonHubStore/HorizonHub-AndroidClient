@@ -54,17 +54,7 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        binding.checkboxFilterMyPosts.setOnCheckedChangeListener { _, isChecked ->
-            showMyPostsOnly = isChecked
-            gamePostViewModel.allPosts.value?.let { gamePosts ->
-                if (showMyPostsOnly) {
-                    val currentUserPosts = gamePosts.filter { post -> post.creator == FirebaseAuth.getInstance().currentUser?.uid }
-                    gamePostAdapter.updateData(currentUserPosts)
-                } else {
-                    gamePostAdapter.updateData(gamePosts)
-                }
-            }
-        }
+
 
         return binding.root
     }
@@ -80,11 +70,22 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
 
 
         }
+        binding.checkboxFilterMyPosts.setOnCheckedChangeListener { _, isChecked ->
+            showMyPostsOnly = isChecked
+            gamePostViewModel.allPosts.value?.let { gamePosts ->
+                if (showMyPostsOnly) {
+                    val currentUserPosts = gamePosts.filter { post -> post.creator == FirebaseAuth.getInstance().currentUser?.email }
+                    gamePostAdapter.updateData(currentUserPosts)
+                } else {
+                    gamePostAdapter.updateData(gamePosts)
+                }
+            }
+        }
         recyclerView.adapter = gamePostAdapter
         gamePostViewModel.allPosts.observe(viewLifecycleOwner) { gamePosts ->
             gamePosts?.let {
                 if (showMyPostsOnly) {
-                    val currentUserPosts = it.filter { post -> post.creator == FirebaseAuth.getInstance().currentUser?.uid }
+                    val currentUserPosts = it.filter { post -> post.creator == FirebaseAuth.getInstance().currentUser?.email }
                     gamePostAdapter.updateData(currentUserPosts)
                 } else {
                     gamePostAdapter.updateData(it)
