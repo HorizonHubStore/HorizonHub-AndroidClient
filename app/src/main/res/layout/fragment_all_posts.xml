@@ -1,39 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/swipeRefreshLayout"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewGamePosts"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
         <CheckBox
             android:id="@+id/checkboxFilterMyPosts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="666dp" />
+            android:layout_marginTop="-10dp"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEllipseRight"
+            app:layout_constraintTop_toBottomOf="@id/textGuideline" />
 
         <TextView
             android:id="@+id/textFilterMyPosts"
             android:layout_width="wrap_content"
             android:layout_height="64dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="637dp"
-            android:layout_toStartOf="@+id/checkboxFilterMyPosts"
+            app:layout_constraintEnd_toStartOf="@id/checkboxFilterMyPosts"
+            app:layout_constraintTop_toBottomOf="@id/textGuideline"
             android:text="My Posts"
             android:textSize="16sp" />
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFilterMyPosts">
 
-    </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewGamePosts"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/textGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.07" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEllipseRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEllipseLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
