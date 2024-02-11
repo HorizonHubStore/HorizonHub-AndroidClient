@@ -12,7 +12,8 @@ import androidx.room.Query
 interface GamePostDao {
     @Insert
     suspend fun addGamePost(gamePost: GamePost)
-
+    @Query("DELETE FROM game_post_table WHERE id = :postId")
+    suspend fun deleteGamePost(postId: String)
     @Query("SELECT * FROM game_post_table")
     fun getAllGamesPosts(): LiveData<List<GamePost>>
 

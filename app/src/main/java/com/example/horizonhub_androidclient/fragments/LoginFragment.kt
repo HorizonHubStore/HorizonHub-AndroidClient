@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.activities.HomeActivity
@@ -34,7 +33,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.example.horizonhub_androidclient.data.user.User
-import java.util.Date
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
     private lateinit var binding: FragmentLoginBinding
@@ -96,6 +94,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                         mUserViewModel.updateAuthState(authState)
                     }
                     loadUsersToLocalDb()
+
                     binding.progressBarLogin.visibility = View.GONE
                     val intent = Intent(requireActivity(), HomeActivity::class.java)
                     startActivity(intent)
@@ -118,40 +117,40 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun loadUsersToLocalDb() {
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
-                    val userId = postSnapshot.key
-                    val userModelMap = postSnapshot.value as Map<*, *>
-                    val userProfile = userModelMap["profileImage"] as String
-                    val lastUpdated = userModelMap["lastUpdate"] as Long
-                    if (userId != null) {
-                        mUserViewModel.getUserById(userId)
-                            .observe(viewLifecycleOwner) { cUser ->
-                                if (cUser == null || lastUpdated != cUser.lastUpdate) {
-                                    mUserViewModel.viewModelScope.launch {
-                                        val byteArray = if (userProfile.isEmpty()){
-                                            drawableToByteArray(requireContext(),R.drawable.default_user_profile)
-                                        }else{
-                                            downloadImageAsByteArray(userModelMap["profileImage"] as String)
-                                        }
-                                        val user =
-                                            User(
-                                                userId,userModelMap["email"] as String,userModelMap["fullName"] as String,
-                                                byteArray,userModelMap["lastUpdate"] as Long)
+                lifecycleScope.launch {
+                    snapshot.children.forEach { postSnapshot ->
+                        val userId = postSnapshot.key
+                        val userModelMap = postSnapshot.value as Map<*, *>
+                        val lastUpdated = userModelMap["lastUpdate"] as Long
+                        if (userId != null && userId == auth.currentUser?.uid) {
+                            mUserViewModel.getUserById(userId)
+                                .observe(viewLifecycleOwner) { cUser ->
+                                    if (cUser == null || lastUpdated != cUser.lastUpdate) {
+                                        lifecycleScope.launch {
+                                            val userProfile = userModelMap["profileImage"] as String
+                                            val byteArray = if (userProfile.isEmpty()) {
+                                                drawableToByteArray(requireContext(), R.drawable.default_user_profile)
+                                            } else {
+                                                downloadImageAsByteArray(userProfile)
+                                            }
+                                            val user = User(
+                                                userId,
+                                                userModelMap["email"] as String,
+                                                userModelMap["fullName"] as String,
+                                                byteArray,
+                                                userModelMap["lastUpdate"] as Long
+                                            )
 
-                                        if (cUser == null) {
-                                            mUserViewModel.addUserToLocalDatabase(user)
-                                        }else{
-                                            mUserViewModel.updateUserProfile(user)
-
+                                            if (cUser == null) {
+                                                mUserViewModel.addUserToLocalDatabase(user)
+                                            } else {
+                                                mUserViewModel.updateUserProfile(user)
+                                            }
                                         }
                                     }
                                 }
-                            }
+                        }
                     }
-
-
-
-
                 }
             }
 
@@ -160,6 +159,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
         })
     }
+
     private suspend fun downloadImageAsByteArray(imageUrl: String): ByteArray {
         return try {
             withContext(Dispatchers.IO) {
