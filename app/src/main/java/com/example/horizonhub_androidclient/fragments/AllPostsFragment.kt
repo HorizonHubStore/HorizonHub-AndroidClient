@@ -1,7 +1,6 @@
 package com.example.horizonhub_androidclient.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,6 +72,8 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
         recyclerView.setHasFixedSize(true)
         gamePostAdapter = GamePostAdapter(emptyList()) { gamePost ->
             database.child(gamePost.id).removeValue()
+            gamePostAdapter.removeGamePost(gamePost)
+
 
         }
         recyclerView.adapter = gamePostAdapter
@@ -94,49 +95,59 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
 
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                val localPosts = gamePostViewModel.allPosts.value ?: emptyList()
+
                 for (postSnapshot in snapshot.children) {
                     val postId = postSnapshot.key!!
                     fetchedPostIds.add(postId)
-                    val postModelMap = postSnapshot.value as Map<*, *>
-                    gamePostViewModel.getGamePostById(postId)
-                        .observe(viewLifecycleOwner) { post ->
-                            if (post == null) {
-                                val postModel = PostModel(
-                                    creator = postModelMap["creator"] as String,
-                                    gameName = postModelMap["gameName"] as String,
-                                    gameImage = postModelMap["gameImage"] as String,
-                                    description = postModelMap["description"] as String,
-                                    price = postModelMap["price"] as Long
-                                )
 
-                                gamePostViewModel.viewModelScope.launch {
-                                    val byteArray = downloadImageAsByteArray(postModel.gameImage)
-                                    if (byteArray != null) {
-                                        val gamePost =
-                                            GamePost(
-                                                id = postId,
-                                                creator = postModel.creator,
-                                                gameName = postModel.gameName,
-                                                gameImage = byteArray,
-                                                description = postModel.description,
-                                                price = postModel.price
-                                            )
-                                        gamePostViewModel.addGamePostToLocalDatabase(gamePost)
+                    val existingPost = localPosts.find { it.id == postId }
+
+                    if (existingPost == null) {
+                        val postModelMap = postSnapshot.value as Map<*, *>
+                        gamePostViewModel.getGamePostById(postId)
+                            .observe(viewLifecycleOwner) { post ->
+                                if (post == null) {
+                                    val postModel = PostModel(
+                                        creator = postModelMap["creator"] as String,
+                                        gameName = postModelMap["gameName"] as String,
+                                        gameImage = postModelMap["gameImage"] as String,
+                                        description = postModelMap["description"] as String,
+                                        price = postModelMap["price"] as Long
+                                    )
+
+                                    gamePostViewModel.viewModelScope.launch {
+                                        val byteArray = downloadImageAsByteArray(postModel.gameImage)
+                                        if (byteArray != null) {
+                                            val gamePost =
+                                                GamePost(
+                                                    id = postId,
+                                                    creator = postModel.creator,
+                                                    gameName = postModel.gameName,
+                                                    gameImage = byteArray,
+                                                    description = postModel.description,
+                                                    price = postModel.price
+                                                )
+                                            gamePostViewModel.addGamePostToLocalDatabase(gamePost)
+                                        }
                                     }
                                 }
                             }
-                        }
-
-                }
-                gamePostViewModel.allPosts.value?.let { localPosts ->
-                    val deletedPosts = localPosts.filter { localPost -> localPost.id !in fetchedPostIds }
-                    deletedPosts.forEach { deletedPost ->
-                        lifecycleScope.launch {
-                            gamePostViewModel.deleteGamePostFromLocalDatabase(deletedPost.id)
-                        }
-                        gamePostAdapter.removeGamePost(deletedPost)
                     }
                 }
+
+                // Remove posts that are not fetched from Firebase
+                val deletedPosts = localPosts.filter { localPost -> localPost.id !in fetchedPostIds }
+                deletedPosts.forEach { deletedPost ->
+                    lifecycleScope.launch {
+                        gamePostViewModel.deleteGamePostFromLocalDatabase(deletedPost.id)
+                        gamePostViewModel.allPosts.value?.let { gamePosts ->
+                            gamePostAdapter.updateData(gamePosts)
+                        }
+
+                    }
+                }
+
                 binding.swipeRefreshLayout.isRefreshing = false
             }
 
@@ -145,6 +156,7 @@ class AllPostsFragment : Fragment(R.layout.fragment_all_posts) {
             }
         })
     }
+
 
 
     private suspend fun downloadImageAsByteArray(imageUrl: String): ByteArray? {

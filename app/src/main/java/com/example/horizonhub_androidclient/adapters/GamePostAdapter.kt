@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.horizonhub_androidclient.R
 import com.example.horizonhub_androidclient.data.gamePost.GamePost
 import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
 
 class GamePostAdapter(
     private var gamePosts: List<GamePost>,
@@ -51,7 +50,7 @@ class GamePostAdapter(
         holder.textViewCreator.text = "Creator: ${currentItem.creator}"
         holder.textViewGameName.text = "Game Name: ${currentItem.gameName}"
         holder.textViewDescription.text = "Description: ${currentItem.description}"
-        holder.textViewPrice.text = "Price: ${currentItem.price}"
+        holder.textViewPrice.text = "Price: ${currentItem.price}$"
         holder.imageViewGameImage.setImageBitmap(currentItem.gameImage?.let { BitmapFactory.decodeByteArray(currentItem.gameImage, 0, it.size) })
 
         // Show delete button only if the current user uploaded the post
