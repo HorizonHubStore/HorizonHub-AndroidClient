@@ -53,8 +53,7 @@ class GamePostAdapter(
         holder.textViewPrice.text = "Price: ${currentItem.price}$"
         holder.imageViewGameImage.setImageBitmap(currentItem.gameImage?.let { BitmapFactory.decodeByteArray(currentItem.gameImage, 0, it.size) })
 
-        // Show delete button only if the current user uploaded the post
-        if (currentItem.creator == FirebaseAuth.getInstance().currentUser?.uid) {
+        if (currentItem.creator == FirebaseAuth.getInstance().currentUser?.email) {
             holder.deleteButton.visibility = View.VISIBLE
             holder.deleteButton.setOnClickListener {
                 onDeleteClick(currentItem)
